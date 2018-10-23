@@ -1,0 +1,85 @@
+<!--pages/competition/register.wxml-->
+<view class='mainbox'>
+
+  <view class='Nomodel' hidden='{{show}}'>
+    <view class='Notext'>
+      <image src='../../img/logo.png'></image>
+      <text>为保证您个人利益，请允许获取信息</text>
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确定</button>
+    </view>
+  </view>
+
+  <view class='logo'>
+    <image mode='aspectFit' class='logo-img' src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/logo.png' />
+  </view>
+  <view class='inputbox'>
+    <view class='inputwarp'>
+      <view class='label'>姓名</view>
+      <view class='input-div'>
+        <input type='text' placeholder='请输入姓名' bindinput='changeName' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>手机</view>
+      <view class='phoneinput'>
+        <input type='number' placeholder='请输入手机号码(必填)' bindinput='changePhone' placeholder-class="placeholder" />
+      </view>
+      <view class='send' bindtap='sendcode'>{{codestate}}</view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>验证码</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请输入验证码' bindinput='getCode' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>所属学校</view>
+      <view class='input-div'>
+        <input type='text' placeholder='请输入学校名称' bindinput='changeSchool' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>身高</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请输入您的身高(cm)' bindinput='changeHeight' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>体重</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请输入您的体重(kg)' bindinput='changeWeight' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>位置</view>
+      <view class='input-div'>
+        <input type='text' placeholder='请填写您的所擅长的位置' bindinput='changePlace' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>背号</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请填写您的背号' bindinput='changeNum' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>身份证号</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请输入身份证号' bindinput='changeIdentity' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='introducewarp'>
+      <view class='introtit'>个人简介</view>
+      <view class='textarebox'>
+        <textarea  placeholder='请填写您的个人简介(50字)' maxlength='50' bindinput='changeIntroduce' placeholder-class="placeholder"/>
+      </view>
+    </view>
+    <view class='uploadclient'>
+      <view class='uploadtit'>请上传手持身份证照片</view>
+      <view class='uploadwarp' bindtap='bindchosepicure'>
+        <image src='{{imgsrc}}'  class='imgsize'/>
+      </view>
+    </view>
+  </view>
+   <view class='regisetbtn' bindtap='bindSubmitTap'>注册</view>
+</view>

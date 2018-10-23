@@ -1,0 +1,20 @@
+/* pages/competition/editname/editname.wxss */
+.input{
+  padding:30rpx;
+  font-size: 32rpx;
+}
+.input input{
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.save{
+  width: 500rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  margin: 20rpx auto;
+  background: #00489D;
+  color:#fff;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+}

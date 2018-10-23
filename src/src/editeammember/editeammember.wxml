@@ -1,0 +1,12 @@
+<!--pages/competition/editeammember/editeammember.wxml-->
+<!--pages/competition/editname/editname.wxml-->
+<view class='main'>
+  <view class='input'>
+    <view>位置：</view><input type='text' value='{{teamPosition}}' bindinput='editposition' auto-focus='true'/>
+  </view>
+  <view class='input'>
+    <view>背号：</view><input type='text' value='{{raceNumber}}' bindinput='editnumber'/>
+  </view>
+</view>
+<view class='save' bindtap='bindsave'>保存</view>
+

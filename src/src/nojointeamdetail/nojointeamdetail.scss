@@ -1,0 +1,177 @@
+/* pages/competition/nojointeamdetail/nojointeamdetail.wxss */
+page{
+  background:#f2f2f2;
+}
+.header{
+  height: 246rpx;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/qiudui-ping.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:#fff;
+  font-size: 20rpx;
+  padding:70rpx 40rpx;
+  box-sizing: border-box;
+}
+.teamlogo{
+  float: left;
+}
+.teamlogo image{
+  width: 104rpx;
+  height: 104rpx;
+}
+.teamcase{
+  float: left;
+  margin-left:40rpx;
+}
+.teamname{
+  font-size:28rpx;
+}
+.applybtn{
+  width: 174rpx;
+  height: 58rpx;
+  float: right;
+  background:#3B68A9;
+  text-align: center;
+  line-height: 58rpx;
+  border-radius:5rpx;
+  margin-top:15rpx;
+  font-size: 26rpx;
+}
+.number{
+  margin-top:10rpx;
+}
+.contentbox{
+  padding:20rpx;
+}
+.nav{
+  margin-top:20rpx;
+  overflow: hidden;
+  font-size: 24rpx;
+}
+.nav view{
+  float: left;
+  width: 180rpx;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+.nav view:last-child{
+  border-right:0;
+}
+.orange{
+  color:#FA8611;
+}
+
+.show{
+  display: block;
+}
+.hidden{
+  display: none;
+}
+.member_panel,.game_panel{
+  position: relative;
+  margin-top: 30rpx;
+  width: 100%;
+  background-color:#fff;
+  border:1px solid #eee;
+  border-radius:15rpx;
+  padding: 30rpx 40rpx;
+  box-sizing: border-box
+}
+.member_panel::before{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   left:70rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+
+.game_panel::after{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   left:254rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+.leader image{
+  width: 104rpx;
+  height: 104rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.leader text{
+  font-size: 24rpx;
+  color:#3B68A9;
+}
+.title{
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 40rpx;
+  color:#FA8611;
+}
+.memberwarp{
+  overflow: hidden;
+}
+.member{
+  overflow: hidden;
+  width:50%;
+  float: left;
+  border-bottom: 1rpx solid #eee;
+  padding:40rpx 0 30rpx;
+  box-sizing: border-box;
+}
+.detail image{
+  width: 104rpx;
+  height: 104rpx;
+  vertical-align:middle;
+  margin-right:30rpx;
+  border-radius:50%;
+}
+.detail text{
+  font-size: 24rpx;
+  color:#333;
+}
+.yes{
+  background-color: gray;
+}
+.trtitle,.tr{
+  overflow: hidden
+}
+.tr{
+  border-bottom: 1rpx solid #eee;
+}
+.trtitle .th{
+  float: left;
+  width: 20%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-bottom:1px solid #eee;
+}
+.tr .touxiang{
+  height: 94rpx;
+  width: 94rpx;
+  border-radius: 50%;
+  float:left;
+}
+.tr .tdcon{
+  float:left;
+  line-height:30rpx;
+  padding-top:20rpx;
+  margin-left:10rpx
+}
+.tr>.td{
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align:center;
+  width: 20%;
+  float: left;
+  font-size: 22rpx;
+}

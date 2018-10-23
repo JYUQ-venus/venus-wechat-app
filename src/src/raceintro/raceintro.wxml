@@ -1,0 +1,4 @@
+<!--pages/competition/raceintro/raceintro.wxml-->
+<view>
+    <image src='{{raceimg}}' mode='widthFix' class='introimg' bindtap='gosigninfo'/>
+</view>

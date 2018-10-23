@@ -1,0 +1,66 @@
+<!--pages/competition/mymessage/mymessage.wxml-->
+<view class='messagetit'>消息</view>
+<view class='messagewap'>
+    <view class='message_null'  wx:if="{{condition}}">
+        <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/nomessage.png'/>
+        <text class='font'>暂无消息</text>
+    </view>
+    <view class='message_have' wx:else>
+      <view class='messagelist' wx:for="{{infoarr}}" wx:key="{{key}}">
+        <block wx:if="{{item.auditJoin==1}}">
+           <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/message_have.png'/>
+        </block>
+        <block wx:else>
+            <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/messagesign_no.png'/>
+        </block>
+        <view class='listcase'>
+          <view class='{{item.auditJoin==1 ? "weight":""}}'>{{item.name}}申请加入球队消息！</view>
+          <block wx:if="{{item.auditJoin==1}}">
+            <view class='chakan' bindtap='viewdetails' data-id="{{item.uId}}">查看{{item.name}}的信息</view>
+          </block>
+          <view class='time'>{{item.applyTime}}</view>
+        </view>
+        <block wx:if="{{item.auditJoin==1}}">
+          <view class='btngroup'>
+            <view bindtap='agree' data-index="{{index}}" data-id="{{item.uId}}">同意</view>
+            <view bindtap='ignore' data-index="{{index}}" data-id="{{item.uId}}">拒绝</view>
+          </view>
+        </block>
+        <block wx:else>
+            <view class='yichuli'>{{item.auditJoin==2?'已同意':'已拒绝'}}</view>
+        </block>
+
+
+        <!-- 弹框 -->
+        <view class='model' hidden='{{switchts}}'>
+          <view class='mainbox'>
+              <image src='{{user_info.headimg}}'/>
+              <view class='information'>
+                  <view class='name'>{{user_info.name}}</view>
+                  <view class='inforbox'>
+                    <view class='list'>
+                      <view>联系电话</view>
+                      <view>{{user_info.phone}}</view>
+                    </view>
+                    <view class='list'>
+                      <view>身高</view>
+                      <view>{{user_info.height}}</view>
+                    </view>
+                    <view class='list'>
+                      <view>体重</view>
+                      <view>{{user_info.weight}}</view>
+                    </view>
+                    <view class='list'>
+                      <view>生日</view>
+                      <view>{{user_info.birthday}}</view>
+                    </view>
+                  </view>
+                  <view class='comfirm' bindtap='close'>确定</view>
+              </view>
+          </view>
+        </view><!-- 弹框结束 -->
+      </view>
+    </view>
+</view>
+
+

@@ -1,0 +1,77 @@
+/* pages/competition/teamset/teamset.wxss */
+.clearfix:after{ 
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+.teaminfobox{
+  padding: 50rpx 30rpx;
+  box-sizing: border-box;
+}
+.label{
+  font-size:26rpx;
+  float: left;
+}
+.teamlogo{
+  height: 140rpx;
+  line-height: 140rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.logoimg{
+  margin-top: 20rpx;
+  height: 100rpx;
+  width: 100rpx;
+  float: right;
+  overflow: hidden;
+}
+.logoimg image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+}
+.inforlist{
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #eeeeee;
+  background-image:url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/youjiantou.png);
+  background-size:2%;
+  background-repeat:no-repeat;
+  background-position: right center;
+}
+.inforlist .inforintro{
+  width: 300rpx;
+  text-align:right;
+  margin-right:20rpx;
+  float: right;
+  font-size: 26rpx;
+}
+.jiesan{
+  width: 669rpx;
+  height: 84rpx;
+  background: #e2e2e2;
+  line-height: 84rpx;
+  text-align: center;
+  margin:0 auto;
+  font-size: 30rpx;
+  border-radius:10rpx;
+}
+.erweiwarp{
+  width: 282rpx;
+  height: 282rpx;
+  background: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/erweiborder.png);
+  background-size: contain;
+  background-position: center;
+  margin:80rpx auto 30rpx;
+  text-align: center;
+}
+.tip{
+  font-size: 18rpx;
+  text-align: center
+}
+.erweiwarp image{
+  margin-top:10rpx;
+  width: 260rpx;
+  height:260rpx;
+}

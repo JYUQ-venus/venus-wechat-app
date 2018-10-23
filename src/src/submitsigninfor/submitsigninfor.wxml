@@ -1,0 +1,49 @@
+<!--pages/competition/submitsigninfor/submitsigninfor.wxml-->
+<!--pages/competition/register.wxml-->
+<view class='mainbox'>
+  <view class='inputbox'>
+    <view class='inputwarp'>
+      <view class='label'>报名赛事</view>
+      <view class='input-div'>
+        <input type='text' value='{{event}}' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>球队名称</view>
+      <view class='input-div'>
+        <input type='text' value='{{teamname}}' bindinput='inputteamname' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class="inputwarp">
+      <view class="label">城市地点</view>
+      <picker  bindchange="bindPickercityChange" data-id="{{eventCityAddress}}" value="{{addressindex}}" range="{{signcityArray}}">
+        <view class="picker">
+          <text class="groupfont {{addressindex==''? 'show' : 'hidden'}}">请选择地点</text>
+          {{signcityArray[addressindex]}}
+        </view>
+      </picker>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>球队领队(18岁以上）</view>
+      <view class='input-div'>
+        <input type='text' placeholder='请输入球队领队' bindinput='inputteamleader' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class='inputwarp'>
+      <view class='label'>球队领队联系方式</view>
+      <view class='input-div'>
+        <input type='number' placeholder='请输入球队领队联系方式' bindinput='inputleaderphone' placeholder-class="placeholder" />
+      </view>
+    </view>
+    <view class="inputwarp">
+      <view class="label">组别</view>
+      <picker  bindchange="bindPickerChange"  data-id="{{eventGroupList}}" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          <text class="groupfont {{index==''? 'show' : 'hidden'}}">请选择组别</text>
+          {{array[index]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class='regisetbtn' bindtap='signsubmit'>提交报名信息</view>
+</view>

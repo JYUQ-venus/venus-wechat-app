@@ -1,0 +1,5 @@
+<!--pages/competition/editintro/editintro.wxml-->
+<view class="section">
+  <textarea placeholder="请完善你的团队简介(15字)" maxlength='14' auto-focus   placeholder-class='place' bindinput='editintro' value='{{intro}}'/>
+</view>
+<view class='save' bindtap='bindsave'>保存</view>

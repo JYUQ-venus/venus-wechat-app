@@ -1,0 +1,67 @@
+// @import 'style/weui';
+// @import 'style/demo';
+// @import 'style/courseCode';
+
+page {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    color: #333;
+    // font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+
+image{
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+cover-image{
+  width: 20px;
+  height: 20px;
+  display: block;
+  overflow: none;
+}
+
+cover-view{
+	line-height: none;
+}
+
+button{
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+  // position: static;
+  line-height: normal;
+  text-align: inherit;
+}
+button::after{
+  border: none;
+  border-radius: 0px;
+}
+
+.bottom_line{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #999999;
+  padding: 12px;
+  >view:first-child, >view:last-child{
+    width: 40px;
+    border: 1px solid #ededf1;
+    margin: 0 12px;
+  }
+  >view{
+    white-space: nowrap;
+  }
+}
+
+.show{
+    display: block;
+}
+
+.hidden{
+    display: none;
+}

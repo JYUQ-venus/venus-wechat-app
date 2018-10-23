@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "src/index"
+  ],
+  "window":{
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "venus",
+    "navigationBarTextStyle": "black"
+  },
+  "debug": true
+}

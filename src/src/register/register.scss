@@ -1,0 +1,153 @@
+
+.Nomodel {
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+background: rgba(0, 0, 0, 0.4);
+z-index: 999;
+display: flex;
+}
+
+.Notext {
+width: 446rpx;
+height: 288rpx;
+background: #fff;
+margin: auto;
+vertical-align: center;
+border-radius: 10rpx;
+text-align: center;
+position: relative;
+}
+
+.Notext>image {
+width: 81rpx;
+height: 81rpx;
+margin: 30rpx 0rpx;
+}
+
+.Notext>text {
+font-size: 23rpx;
+color: #333;
+display: block;
+}
+
+.Notext>button {
+width: 100%;
+height: 70rpx;
+color: #ef933c;
+font-size: 25rpx;
+position: absolute;
+bottom: 0rpx;
+line-height: 70rpx;
+}
+
+
+/* pages/competition/register.wxss */
+page{
+  background-repeat: no-repeat;
+  background: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/registerbg.jpg) #010101;
+  background-size:contain;
+  box-sizing: border-box;
+  background-position: 0 0;
+  background-attachment:fixed; 
+  padding-bottom: 50rpx; 
+  padding-top: 50rpx; 
+}
+.mainbox{
+  width: 686rpx;
+  background-color: #fafafa;
+  margin:0 auto;
+  border-radius:15rpx;
+  box-sizing: border-box;
+  overflow: scroll; 
+}
+.logo{
+  text-align: left;
+  margin-left:85rpx;
+}
+.logo-img{
+  width: 400rpx;
+  height: 200rpx;
+}
+.inputbox{
+  padding:0 85rpx 50rpx;
+}
+.inputwarp{
+  height: 50rpx;
+  line-height: 50rpx;
+  overflow:hidden;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
+}
+.inputwarp input{
+  font-size: 28rpx;
+}
+.label{
+  font-size: 28rpx;
+  float: left;
+}
+.placeholder{
+  font-size: 26rpx;
+  color:#aaaaaa;
+}
+.input-div input{
+  float: right;
+  text-align:right;
+}
+.phoneinput{
+  width: 300rpx;
+  float: left;
+  margin-left:25rpx;
+}
+.send{
+  float: right;
+  font-size:24rpx;
+  color:#00479d;
+}
+.introtit{
+  font-size:28rpx;
+}
+.textarebox{
+  margin-top:10rpx;
+}
+.textarebox textarea{
+  display: block;
+  padding: 10rpx;
+  width: 100%;
+  height:150rpx;
+  font-size: 28rpx;
+  border:1rpx solid #eee;
+  border-radius:10rpx;
+  box-sizing: border-box;
+}
+.uploadtit{
+  font-size: 28rpx;
+  margin:15rpx 0;
+}
+.uploadwarp{
+  width:100%;
+  height: 200rpx;
+  background-color: #efefef;
+  border:1rpx solid #ddd;
+  border-radius:10rpx;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/upclient.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:50%;
+}
+.regisetbtn{
+  width: 596rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #00479d;
+  border-radius: 30rpx;
+  margin:0 auto 50rpx;
+  font-size: 30rpx;
+}
+.imgsize{
+  width: 100%;
+  height: 100%;
+}

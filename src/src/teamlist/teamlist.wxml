@@ -1,0 +1,42 @@
+<!--pages/competition/teamlist/teamlist.wxml-->
+<view class='header'>
+  <view class="selectcity">
+    <picker bindchange="bindPickercity" value="{{cityindex}}" range="{{city}}">
+      <view class="picker">
+        <text class="{{cityindex==''? 'show' : 'hidden'}}">全部</text>
+        {{city[cityindex]}}
+      </view>
+    </picker>
+  </view>
+  <view class='searchbar'>
+    <input type='text' placeholder='请输入球队名称搜索' placeholder-class='searchplace' bindinput='changeSearchval' />
+    <view class='clicksearch' bindtap='searchtap'></view>
+  </view>
+  <view class='createteam' bindtap='bindcreateam'></view>
+</view>
+<!--球队列表-->
+<view class='teamlistwarp'>
+    <block wx:if="{{teamlistArray == null }}">
+      <view class='null'>
+           没有该记录
+      </view>
+    </block>
+    <block wx:if="{{teamlistArray ==''}}">
+      <view class='null'>
+           暂无球队记录
+      </view>
+    </block>
+    <block wx:else>
+    <view  class='listdetail' wx:for="{{teamlistArray}}"  data-id="{{item.id}}"  data-statu="{{item.auditJoin}}" wx:key="{{key}}"   bindtap='gototeamdetail' data-event="{{item.eventId}}">
+      <view class="teamlogo">
+        <image src="{{item.clubLogo}}"/>
+      </view>
+      <view class='teamcase'>
+        <text class='teamname'>{{item.name}}</text>
+        <view class='number'>球员人数：{{item.numberPlayers}}人</view>
+        <view class='addr'>{{item.city}}</view>
+      </view>
+      <view catchtap='apply' class="join {{item.auditJoin == 0 ? 'orange':'gray'}}"  data-index="{{index}}" data-statu="{{item.auditJoin}}" data-id="{{item.id}}">{{item.auditJoin == 1 ? '已申请':'申请加入'}}</view>
+    </view>
+    </block>
+</view>

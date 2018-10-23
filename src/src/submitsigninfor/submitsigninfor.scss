@@ -1,0 +1,71 @@
+/* pages/competition/submitsigninfor/submitsigninfor.wxss */
+page{
+  background-repeat: no-repeat;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/signupbg.jpg);
+  background-size: cover;
+  box-sizing: border-box;
+}
+.mainbox{
+  width: 686rpx;
+  background-color: #fafafa;
+  margin:150rpx auto 50rpx;
+  border-radius:15rpx;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+.hidden{
+  display: none;
+}
+.show{
+  display:block;
+}
+.groupfont{
+  color:#aaaaaa;
+}
+.inputbox{
+  padding:85rpx 50rpx;
+}
+.inputwarp{
+  padding:20rpx 0;
+  overflow:hidden;
+  border-bottom: 1rpx solid #eee;
+}
+.inputwarp input{
+  font-size: 28rpx;
+}
+.label{
+  font-size: 28rpx;
+  float: left;
+}
+.picker{
+  height:40rpx;
+  width: 340rpx;
+  float: right;
+  font-size:28rpx;
+  text-align: right;
+}
+.placeholder{
+  font-size: 26rpx;
+  color:#aaaaaa;
+}
+.input-div input{
+  float: right;
+  text-align:right;
+}
+.phoneinput{
+  width: 300rpx;
+  float: left;
+  margin-left:25rpx;
+}
+
+.regisetbtn{
+  width: 596rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #00479d;
+  border-radius: 30rpx;
+  margin:0 auto 50rpx;
+  font-size: 30rpx;
+}

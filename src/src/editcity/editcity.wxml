@@ -1,0 +1,9 @@
+<!--pages/competition/editcity/editcity.wxml-->
+<view class="input-div">
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        <text>{{region}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class='save' bindtap='bindsave'>保存</view>

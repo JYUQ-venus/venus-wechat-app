@@ -1,0 +1,27 @@
+/* pages/competition/editintro/editintro.wxss */
+.section{
+  padding: 30rpx;
+}
+.section textarea{
+  width: 100%;
+  height: 200rpx;
+  border:1rpx solid #eeeeee;
+  border-radius: 10rpx;
+  padding-top:10rpx;
+  padding-left: 10rpx;
+  box-sizing: border-box;
+}
+.place{
+  font-size: 30rpx;
+}
+.save{
+  width: 500rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  margin: 20rpx auto;
+  background: #00489D;
+  color:#fff;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+}

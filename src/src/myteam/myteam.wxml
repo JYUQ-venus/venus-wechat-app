@@ -1,0 +1,115 @@
+<!--pages/competition/myteam/myteam.wxml-->
+<view class='header'>
+    <view class='teamlogo'>
+      <image src='{{clubfinfo.clubLogo}}'/>
+    </view>
+    <view class='teamcase'>
+       <view class='teamname'>{{clubfinfo.name}}</view> 
+        <text>球员人数：{{clubfinfo.numberPlayers}}人</text>
+        <text>{{clubfinfo.city}}</text>
+    </view>
+    <view bindtap='bindteamset' class='teamset' data-clubid='{{clubfinfo.id}}'>
+      <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/teamset.png'/>
+    </view>
+</view>
+<view class='contentbox'>
+  <view class="nav">
+    <view class="{{selected?'orange':''}}" bindtap="selected">球队成员</view>
+    <view class="{{selected1?'orange':''}}" bindtap="selected1">比赛数据</view>
+    <view class="{{selected2?'orange':''}}" bindtap="selected2">比赛荣誉</view>
+    <view class="{{selected3?'orange':''}}" bindtap="selected3">报名赛事</view>
+  </view>
+   <!-- 球队成员 -->
+  <view class="member_panel {{selected? 'show':'hidden'}}">
+      <view class='leader'>
+        <image src='{{memberlistArray.leaderhead}}'/>
+        <text>{{memberlistArray.leadername}} (球队队长)</text>
+        <view class='message'  bindtap='bindmessage'>消息({{messagelist.length}})</view>
+      </view>
+      <view class='title'>
+        <text>— 队员({{memberlistArray.memberdetail.length}}人) —</text>
+      </view>
+      <view class='memberwarp clearfix'>
+            <view class='detail' wx:for="{{memberlistArray.memberdetail}}" data-index="{{index}}" bindtap='gomemberdetail' wx:key="{{key}}">
+              <view class='kickout' catchtap='del' data-index="{{index}}" data-userid="{{item.id}}"></view>
+              <view class="detailwarp">
+                <image src='{{item.headimg}}'/>
+                <view style='font-size:28rpx;margin-bottom:15rpx'>{{item.name}}</view>
+                <view class='caseone'>位置：{{item.teamPosition}}</view>
+                <view class='casetwo'>背号：{{item.raceNumber}}</view>
+                <view class='renming' data-playid='{{item.id}}' data-clubid='{{clubfinfo.id}}' catchtap='bindrenming'>任命为队长</view>
+              </view>
+            </view>
+            <view class='invite'>
+              <view class="invitewarp">
+                <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/yaoqing.png' style='width:115rpx;height:115rpx;'/>
+                <view style='margin-top:80rpx;font-size:30rpx;color:#666'>邀请成员</view>
+                <button class='invitebtn' open-type="share">邀请</button>
+              </view>
+            </view>
+      </view>
+  </view> 
+  <!-- 比赛数据 -->
+  <view class="game_panel {{selected1?'show':'hidden'}}">
+     <view class="table">
+        <view class="trtitle">
+            <view class="th">号码</view>
+            <view class="th" style='width:40%'>球员</view>
+            <view class="th">场均</view>
+            <view class="th">得分</view>
+        </view>
+        <view wx:if="{{gamedatarry.length==0}}" class='null'>暂无数据</view>
+        <view class="tr" wx:for="{{gamedatarry}}" wx:key="key">
+            <view class="td">{{item.raceNumber}}</view>
+            <view class="td qiuyuan" style='width:40%;text-align:left;margin-top:20rpx'>
+              <image  class='touxiang' src='{{item.headimg}}'/>
+              <view class='tdcon'>
+                <view>{{item.name}}</view>
+                <view>{{item.eName}}</view>
+              </view>
+            </view>
+            <view class="td">{{item.avgScore}}</view>
+            <view class="td">{{item.sumScore}}</view>
+        </view>
+    </view>
+  </view>
+  <!-- 比赛荣誉-->
+  <view class="game_honor {{selected2?'show':'hidden'}}">
+     <view class="table">
+        <view class="honortitle">
+            <view class="honorth" style='width:25%'>称号</view>
+            <view class="honorth" style='width:75%'>球员</view>
+        </view>
+        <view wx:if="{{gamehonorarry.length==0}}" class='null'>暂无数据</view>
+        <view class="honortr" wx:for="{{gamehonorarry}}" wx:key="{{key}}">
+            <view class="honortd" style='width:25%;text-align:center'>
+              <image src='{{item.honorLogo}}' class='honorpic'/>
+              {{item.titleHonor}}
+            </view>
+            <view class="honortd honorqiuyuan">
+              <image  class='honortouxiang' src='{{item.headimg}}'/>
+              <view class='honortdcon'>
+                <view>{{item.name}}</view>
+                <view>{{item.eName}}</view>
+              </view>
+            </view>
+        </view>
+    </view>
+  </view>
+  <!-- 报名赛事-->
+  <view class="signrace {{selected3?'show':'hidden'}}">
+      <view wx:for="{{signracelist}}"  wx:for-item="i"  wx:key="{{key}}" class='race'>
+        <view class='signwarp'>
+          <view class='leftblock'>
+              <view class='signame'>{{i.name}}</view>
+              <view class='signtime'>{{i.signUpTimeStart}}至{{i.signUpTimeEnd}}</view>
+          </view>
+          <view class='signracebtn {{i.registrationStatus==0? " " :"gray"}}' data-race='{{i.id}}' bindtap='gosign' data-club="{{clubfinfo.id}}" data-statu="{{i.registrationStatus}}" data-actstatu="{{i.state}}">{{i.registrationStatus==0? "去报名" :"已报名"}}</view>
+        </view>
+        <view class='signlist' wx:for="{{i.eventCaptainList}}" wx:for-item="j"  wx:key="key">
+          <view class='city'>{{j.city}}</view>
+          <view class='addr'>{{j.address}}</view>
+        </view>
+      </view>
+  </view>
+</view>

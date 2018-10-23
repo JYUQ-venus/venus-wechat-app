@@ -1,0 +1,5 @@
+<!--pages/competition/editname/editname.wxml-->
+<view class='input'>
+  <input type='text' value='{{valuename}}' bindinput='editname' auto-focus='true'/>
+</view>
+<view class='save' bindtap='bindsave'>保存</view>

@@ -1,0 +1,130 @@
+/* pages/competition/teamlist/teamlist.wxss */
+.header{
+  height: 136rpx;
+  background-color: #171414;
+  color: #fff;
+  line-height: 136rpx;
+  font-size:30rpx;
+  padding:0 30rpx;
+  overflow: hidden
+}
+.picker{
+  height: 136rpx;
+}
+.selectcity{
+  text-align: center;
+  width: 100rpx;
+  float: left;
+  font-size: 25rpx;
+  overflow: hidden;
+  margin-right:10rpx;
+}
+.show{
+  display: block
+}
+.hidden{
+  display: none
+}
+.searchplace{
+  font-size: 25rpx;
+  color:#cccccc;
+}
+.searchbar{
+  position: relative;
+  float: left;
+  margin-top:32rpx;
+}
+.searchbar input{
+  color: #333;
+}
+.clicksearch{
+  position: absolute;
+  right: 30rpx;
+  top:21rpx;
+  height: 30rpx;
+  width: 30rpx;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/searchbtn.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
+}
+.searchbar input{
+  padding-left:20rpx;
+  width: 469rpx;
+  background: #fff;
+  height: 72rpx;
+  border-radius: 30rpx;
+}
+.createteam{
+  width: 66rpx;
+  height: 52rpx;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/creatsign.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  float:right;
+  font-size: 20rpx;
+  margin-top: 40rpx;
+}
+.teamlistwarp{
+  padding:0 30rpx;
+}
+.teamlogo{
+  float: left;
+  margin-right: 40rpx;
+}
+.teamlogo image{
+  height: 119rpx;
+  width: 119rpx;
+}
+.teamcase{
+  float: left;
+  font-size: 22rpx;
+}
+.listdetail{
+  padding:20rpx 0;
+  border-bottom: 1rpx solid #eee;
+  overflow: hidden;
+}
+.teamname{
+  font-size: 28rpx;
+}
+.number{
+  padding-left:30rpx;
+  margin-top: 10rpx;
+  background-image: url("http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/qiunum.png");
+  background-size:20rpx;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.addr{
+  padding-left:30rpx;
+  margin-top: 10rpx;
+  background-image: url("http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/addr.png");
+  background-size:20rpx;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.join{
+  float: right;
+  width: 172rpx;
+  height: 57rpx;
+  color:#fff;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 57rpx;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+}
+.gray{
+  background-color:#aaaaaa;
+}
+.orange{
+   background-color:#fa8208;
+}
+.null{
+  font-size: 28rpx;
+  color:#666666;
+  text-align: center;
+  margin-top: 30rpx;
+}

@@ -1,0 +1,198 @@
+<template name="indexHeader">
+	<view class="tem-header">
+	  <view class="tem-header_left">
+	    <image src="{{logo}}"></image>
+	  </view>
+	</view>
+</template>
+
+<template name="searchHeader">
+	<button class="tem-search" catchtap="" formType="submit" data-type="open">
+	  <view class="tem-search_icon">
+	    <image src="{{logo}}"></image>
+	  </view>
+	  <view class="tem-search_input">
+	    <view>这是一个大大的搜索框</view>
+	  </view>
+	</button>
+</template>
+
+<template name="topicCode">
+	<view class="tem-topic_code"  catchtap="gotoTopicInfo" data-id="{{id}}">
+		<view class="tem-topic_img">
+			<image mode="aspectFit" src="{{image != '' ? image : 'https://maohao-static.oss-cn-beijing.aliyuncs.com/manual/mine-bg.png'}}"></image>
+		</view>
+		<view class="tem-topic_name">{{sname}}</view>
+		<view class="tem-topic_info">
+			<view>{{courseNum || 0}}个课程</view>
+			<view>{{fanSize}} 关注</view>
+		</view>
+		<view class="tem-topic_user" catchtap="gotoUserInfo" data-name="{{uname}}" data-sourse="topic" data-user="{{userId}}">
+			<image class="tem-topic_user_img" src="{{headImage}}"></image>
+			<view class="tem-topic_user_info">
+				<view class="tem-topic_user_name">{{uname}}</view>
+				<view class="tem-topic_user_text">{{userInfo || '暂无简介'}}</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="lookAll">
+	<view class="tem-look_btn">
+		<button formType="submit" hover-class="none">{{text}}</button>
+	</view>
+</template>
+
+<template name="courseCodeOne">
+	<view class="tem-courseOne" bindtap="gotoCourseInfo" data-type="{{sourseKey}}" data-id="{{id}}">
+		<view class="tem-courseOne_body" style="width: {{page == 'index' ? 90 : 100}}%">
+			<view class="tem-courseOne_left">
+				<view class="tem-courseOne_left_mask" style="background: {{maskBg}}">
+					<block wx:if="{{page == 'index'}}">
+						<image src="../images/maohao_icon@3x.png"></image>
+					</block>
+					<block wx:if="{{page == 'other'}}">
+						<image src="../../images/maohao_icon@3x.png"></image>
+					</block>
+				</view>
+				<image src="{{icon}}" mode="aspectFit" class="tem-courseOne_left_img"></image>
+			</view>
+			<view class="tem-courseOne_right">
+				<view class="tem-courseOne_name">{{name}}</view>
+				<view class="tem-courseOne_text" style="margin-bottom: 6px;">{{intro}}</view>
+				<block wx:if="{{rate != 0}}">
+					<view class="tem-courseOne_start" style="margin-bottom: 13px;">
+						<view class="tem-courseOne_start_num">{{rateNum}}</view>
+						<view class="tem-courseOne_start_img">
+							<block wx:if="{{page == 'index'}}">
+								<image src="../images/newStart.png"></image>
+							</block>
+							<block wx:if="{{page == 'other'}}">
+								<image src="../../images/newStart.png"></image>
+							</block>
+							<view style="width: {{startWidth}}px" class="tem-start_center_layer"></view>
+							<view class="tem-start_bottom_layer"></view>
+						</view>
+					</view>
+				</block>
+				<view class="tem-courseOne_sourse">
+					<view>{{source}}</view>
+					<view></view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="courseCodeTwo">
+	<view class="tem-courseCodeTwo" bindtap="gotoCourseInfo" data-type="{{sourseKey}}" data-id="{{id}}">
+		<view class="tem-courseCodeTwo_left">
+			<view class="tem-course_two_name">{{name}}</view>
+			<view class="tem-course_two_info" style="margin-bottom: 5px;">{{intro || '暂无简介'}}</view>
+			<block wx:if="{{showType != 'lenovo'}}">
+				<block wx:if="{{rate != 0}}">
+					<view class="tem-course_two_start">
+						<view class="tem-course_two_sate">{{rateNum}}</view>
+						<view class="tem-course_two_start_img">
+							<image src="../../images/newStart.png"></image>
+							<view class="tem-start_center_layer" style="width: {{startWidth}}px"></view>
+							<view class="tem-start_bottom_layer"></view>
+						</view>
+					</view>
+				</block>
+			</block>
+			<view class="tem-course_two_bottom">
+				<!-- <block wx:if="{{price == 0}}">
+					<view class="tem-course_two_price">免费</view>
+				</block>
+				<block wx:else>
+					<view class="tem-course_two_price">￥{{price}}</view>
+				</block> -->
+				<view class="tem-course_two_price"></view>
+				<view class="tem-course_two_source">{{source}}</view>
+			</view>
+		</view>
+		<view class="tem-courseCodeTwo_right">
+			<image src="{{icon}}" mode="aspectFit" class="tem-courseTwo_left_img"></image>
+		</view>
+	</view>
+</template>
+
+<template name="commentCode">
+	<view class="tem-comment">
+		<view class="tem-comment_course" catchtap="gotoCourseInfo" data-type="comment" data-id="{{courseId}}">
+			<image src="../images/lianjie@3x.png"></image>
+			<view class="tem-comment_course_name">{{course_name}}</view>
+		</view>
+		<view class="tem-comment_content" catchtap="gotoCommentInfo" data-id="{{id}}"><text>{{content}}</text></view>
+		<view class="tem-comment_user" catchtap="gotoUserInfo" data-name="{{user_name}}" data-sourse="comment" data-user="{{userId}}">
+			<image class="tem-comment_user_img" src="{{user_icon}}"></image>
+			<view class="tem-comment_user_info">
+				<view class="tem-comment_user_name">{{user_name}}</view>
+				<view class="tem-comment_user_text">{{user_info}}</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="loading">
+	<view style="z-index: 99999;" class="tem-loading_head {{ loadingType == 'other' ? 'tem-loading_bgColor' : '' }}">
+		<view class="tem-loading_img">
+			<image src="{{loadingIcon}}"></image>
+			<!-- <block wx:if="{{ loadingType != 'index' }}"> -->
+				<view>正在加载</view>
+			<!-- </block> -->
+		</view>
+	</view>
+</template>
+
+<template name="audio">
+	<view class="tem-audio {{isPlay ? 'tem-play_animation' : 'tem-stop_animation'}}" bindtap="showAudio">
+		<view class="tem-audio_bgimg">
+			<image src="{{audioImg}}"></image>
+			<block wx:if="{{page == 'index'}}">
+				<image src="../images/{{ isPlay ? 'audio-play' : 'audio-unplay' }}.png"></image>
+			</block>
+			<block wx:else>
+				<image src="../../images/{{ isPlay ? 'audio-play' : 'audio-unplay' }}.png"></image>
+			</block>
+		</view>
+	</view>
+</template>
+
+<template name="inputLabel">
+	<view class="tem-input_label" style="bottom: {{labelBottom}}px;">
+	  <!-- <view class="tem-input_label_list">
+	    <image src="../../images/expression@3x.png"></image>
+	    <view>表情</view>
+	  </view> -->
+		<view class="tem-input_label_list" bindtap="selectImg">
+			<image src="../../images/label@3x.png"></image>
+			<view>图片</view>
+		</view>
+	  <view class="tem-input_label_list" bindtap="gotoLabel">
+	    <image src="../../images/label@3x.png"></image>
+	    <view>标签</view>
+	  </view>
+	</view>
+</template>
+
+<template name="label">
+	<view class="tem-label">
+		<view class="tem-label_list" wx:for-items="{{labelList}}" wx:key="{{index}}" bindtap="{{ type == 'create' ? 'clickLabel' : '' }}" data-id="{{item.id}}">
+			<image src="../../images/label@3x.png"></image>
+			<view>{{item.name}}</view>
+		</view>
+	</view>
+</template>
+
+<template name="credit">
+	<view class="tem-credit_mask" catchtouchmove="true">
+		<view class="tem-credit_code" catch:tap="gotoIntegral">
+			<image src="http://image.zhishisenlin.com/contribution/contribution-code-icon.png"></image>
+			<view class="number">+<text>{{num}}</text></view>
+			<view class="text">贡献值</view>
+			<image class="close" src="http://image.zhishisenlin.com/contribution/blue-close.png" catch:tap="closeCredit"></image>
+		</view>
+	</view>
+</template>

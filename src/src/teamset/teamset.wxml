@@ -1,0 +1,29 @@
+<!--pages/competition/teamset/teamset.wxml-->
+<view class='teaminfobox'>
+    <view class='teamlogo clearfix'>
+      <view class='label'>球队logo</view>
+      <view class='logoimg' bindtap='bindlogo'>
+        <image src='{{logosrc}}'/>
+      </view>
+    </view>
+    <view class='inforlist clearfix' bindtap='editname'>
+      <view class='label'>队名</view>
+      <view class='inforintro'>{{teamname}}</view>
+    </view>
+    <view class='inforlist clearfix' bindtap='editcity'>
+      <view class='label'>地址</view>
+      <view class='inforintro'>{{city}}</view>
+    </view>
+    <view class='inforlist clearfix' bindtap='editintro'>
+      <view class='label'>球队简介</view>
+      <view class='inforintro'>{{teaminfo}}</view>
+    </view>
+</view>
+<view class='jiesan' bindtap='dissolve'>解散球队</view>
+<view class='erweiwarp'>
+  <image src='{{qrcode}}' bindtap='previmg'></image>
+</view>
+<view class='tip'>
+  <view>长安保存二维码,将二维码发送至微信群或朋友</view>
+  <view>邀请球队进队</view>
+</view>

@@ -1,0 +1,31 @@
+<!--pages/competition/createam/createam.wxml-->
+<!--pages/login/login.wxml-->
+<view class='logo'>
+    <image mode='aspectFit' class='logo-img' src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/logo.png' />
+</view>
+<view class='upteamlogo' bindtap='choseteamlogo'>
+    <image src='{{teamlogosrc}}'  class='imgsize'/>
+</view>
+<view class='maininput'>
+  <view class='input-div'>
+    <input type='text' placeholder='请输入球队名称'  bindinput='changeTeamname' placeholder-class='place' />
+  </view>
+  <view class="input-div">
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        <text class="{{flag==1 ? 'style' : ''}}">{{region}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class='input-div'>
+    <input type='text' disabled='disabled' value='{{leadername}}'  placeholder-class='place'/>
+  </view>
+</view>
+<view class='next'>
+  <view class='next-inner' bindtap='bindcreateam'>
+    创建球队
+  </view>
+</view>
+
+
+

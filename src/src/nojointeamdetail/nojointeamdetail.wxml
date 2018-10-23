@@ -1,0 +1,59 @@
+<!--pages/competition/nojointeamdetail/nojointeamdetail.wxml-->
+<view class='header'>
+    <view class='teamlogo'>
+      <image src='{{teamlogosrc}}'/>
+    </view>
+    <view class='teamcase'>
+       <text class='teamname'>{{teamname}}</text>
+        <view class='number'>球员人数：{{peoplenum}}人</view>
+        <view class='addr'>{{addrcity}}</view>
+    </view>
+    <view class="applybtn {{auditJoin == 0 ? ' ':'yes'}}"  bindtap='join'>{{auditJoin == 0 ? '申请加入':'已申请'}}</view>
+</view>
+<view class='contentbox'>
+  <view class="nav">
+    <view class="{{selected?'orange':''}}" bindtap="selected">球队成员</view>
+    <view class="{{selected1?'orange':''}}" bindtap="selected1">比赛数据</view>
+  </view>
+  <!-- 球队成员 -->
+  <view class="member_panel {{selected? 'show':'hidden'}}">
+      <view class='leader'>
+        <image src='{{memberlistArray.leaderhead}}'/>
+        <text>{{memberlistArray.leadername}}(球队队长)</text>
+      </view>
+      <view class='title'>
+        <text>— 队员({{memberlistArray.memberdetail.length}}人) —</text>
+      </view>
+      <view class='memberwarp'>
+        <view class='member' wx:for="{{memberlistArray.memberdetail}}" wx:key="{{key}}">
+            <view class='detail'>
+              <image src='{{item.headimg}}'/>
+              <text>{{item.name}}</text>
+            </view>
+        </view>
+      </view>
+  </view> 
+  <!-- 比赛数据 -->
+  <view class="game_panel {{selected1?'show':'hidden'}}">
+     <view class="table">
+        <view class="trtitle">
+            <view class="th">号码</view>
+            <view class="th" style='width:40%'>球员</view>
+            <view class="th">场均</view>
+            <view class="th">得分</view>
+        </view>
+        <view class="tr" wx:for="{{gamedatarry}}" wx:key="{{key}}">
+            <view class="td">{{item.raceNumber}}</view>
+            <view class="td qiuyuan" style='width:40%;text-align:left;margin-top:20rpx'>
+              <image  class='touxiang' src='{{item.headimg}}'/>
+              <view class='tdcon'>
+                <view>{{item.name}}</view>
+                <view>{{item.eName}}</view>
+              </view>
+            </view>
+            <view class="td">{{item.avgScore}}</view>
+            <view class="td">{{item.sumScore}}</view>
+        </view>
+    </view>
+  </view>
+</view>

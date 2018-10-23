@@ -1,0 +1,367 @@
+/* pages/competition/myteam/myteam.wxss */
+page{
+  background:#f2f2f2;
+}
+.null{
+  font-size: 24rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.clearfix:after{
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.header{
+  height: 284rpx;
+  background-image: url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/qiudui_shang.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:#fff;
+  font-size: 20rpx;
+  padding:70rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.kickout{
+  width:34rpx;
+  height:34rpx;
+  position: absolute;
+  right:-17rpx;
+  top: -17rpx;
+  background-image:url(http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/del.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius:50%;
+  z-index: 100;
+}
+.teamlogo{
+  float: left;
+}
+.teamlogo image{
+  width: 104rpx;
+  height: 104rpx;
+}
+.teamcase{
+  float: left;
+  margin-left:40rpx;
+}
+.teamname{
+  font-size: 32rpx;
+  margin:10rpx 0rpx;
+}
+.teamcase text{
+  font-size: 24rpx;
+  margin-right: 20rpx;
+}
+.teamset{
+  position: absolute;
+  right: 30rpx;
+  top: 40rpx;
+}
+.teamset image{
+  width: 120rpx;
+  height: 28rpx;
+}
+.contentbox{
+  padding:20rpx;
+}
+.nav{
+  margin-top:20rpx;
+  overflow: hidden;
+  font-size: 24rpx;
+  display: flex;
+}
+.nav view{
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+.nav view:last-child{
+  border-right:0;
+}
+.orange{
+  color:#FA8611;
+}
+.show{
+  display: block;
+}
+.hidden{
+  display: none;
+}
+.member_panel,.game_panel,.game_honor,.signrace{
+  position: relative;
+  margin-top: 30rpx;
+  width: 100%;
+  background-color:#fff;
+  border:1px solid #eee;
+  border-radius:15rpx;
+  padding: 30rpx;
+  box-sizing: border-box
+}
+.member_panel::before{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   left:80rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+
+.game_panel::before{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   left:250rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+.game_honor::before{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   right:250rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+.signrace::before{
+   border-left: 15rpx solid transparent;  
+   border-right: 15rpx solid transparent;  
+   border-bottom: 20rpx solid #fff; 
+   top:-15rpx; 
+   right:80rpx;
+   content: "";  
+   position:absolute;      
+   width: 0;
+}
+/* 球队成员 */
+.leader image{
+  width: 104rpx;
+  height: 104rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.leader text{
+  font-size: 24rpx;
+  color:#3B68A9;
+}
+
+.leader .message{
+  float: right;
+  font-size: 26rpx;
+  width: 140rpx;
+  height: 54rpx;
+  text-align: center;
+  line-height: 54rpx;
+  color:#fff;
+  background:#D0151C;
+  border-radius:10rpx;
+  margin-top:25rpx;
+  margin-right:20rpx;
+}
+.title{
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 40rpx;
+  color:#FA8611;
+}
+.memberwarp{
+  margin-top:100rpx;
+}
+.detail,.invite{
+  font-size: 20rpx;
+  text-align: center;
+  position: relative;
+  height: 280rpx;
+  width:196rpx;
+  float: left;
+  box-sizing: border-box;
+  background:#f2f2f2;
+  margin-right:9rpx;
+  margin-left:9rpx;
+  margin-bottom: 100rpx;
+}
+.detail image{
+  position: absolute;
+  top:-45rpx;
+  left:53rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius:50%;
+}
+.invite image{
+  position: absolute;
+  top:-58rpx;
+  left:40rpx;
+  border-radius:50%;
+}
+.detailwarp,.invitewarp{
+  margin-top:60rpx;
+}
+.caseone,.casetwo{
+  width: 120rpx;
+  margin: 0 auto;
+  text-align: left;
+  color:#666;
+}
+.renming{
+  width: 152rpx;
+  height: 56rpx;
+  background:#FA8208;
+  color:#fff;
+  position: absolute;
+  left: 22rpx;
+  bottom: 20rpx;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 56rpx;
+  border-radius: 10rpx;
+}
+
+.invitebtn{
+  width: 152rpx;
+  height: 56rpx;
+  background:#336CB1;
+  color:#fff;
+  position: absolute;
+  left: 22rpx;
+  bottom: 20rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 56rpx;
+  border-radius: 10rpx;
+}
+
+
+
+
+/* 比赛数据比赛荣誉 */
+.trtitle,.tr,.honortitle,.honortr{
+  overflow: hidden
+}
+.tr,.honortr{
+  border-bottom: 1rpx solid #eee;
+}
+.trtitle .th{
+  float: left;
+  width: 20%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-bottom:1px solid #eee;
+}
+.honortitle .honorth{
+  float: left;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-bottom:1px solid #eee;
+}
+.touxiang,.honortouxiang{
+  height: 94rpx;
+  width: 94rpx;
+  border-radius: 50%;
+  float:left;
+}
+.tr .tdcon,.honortr .honortdcon{
+  float:left;
+  line-height:30rpx;
+  padding-top:20rpx;
+  margin-left:10rpx;
+  box-sizing: border-box;
+}
+.tr>.td{
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align:center;
+  width: 20%;
+  float: left;
+  font-size: 22rpx;
+}
+.honortd{
+  height: 120rpx;
+  line-height: 120rpx;
+  float: left;
+  font-size: 22rpx;
+}
+.honorpic{
+  height: 40rpx;
+  width: 40rpx;
+  vertical-align: middle;
+}
+.honorqiuyuan{
+  padding-left:50rpx;
+  box-sizing: border-box;
+  width:75%;
+  text-align:left;
+  margin-top:20rpx;
+  float: right;
+}
+
+
+/* 报名赛事 */
+.signwarp{
+  overflow: hidden;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-bottom: 1rpx solid #eee;
+  padding-bottom: 10rpx;
+}
+
+.leftblock{
+  float: left;
+}
+.signtime{
+  font-size:22rpx;
+  color:#333;
+  font-weight: normal;
+}
+.racename{
+  float: right;
+}
+.signlist{
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 22rpx;
+  color:#666;
+}
+.signlist .city{
+  float: left;
+  margin-right: 80rpx;
+}
+.signlist .addr{
+  float:left;
+}
+.signracebtn{
+  float:right;
+  width: 140rpx;
+  height: 54rpx;
+  background:#336CB1;
+  color:#fff;
+  text-align: center;
+  line-height:54rpx;
+  border-radius:10rpx;
+  margin-top:10rpx;
+}
+.gray{
+  background: #CCCCCC;
+  color:#fff;
+}
+.race{
+  margin-bottom:25rpx;
+}
