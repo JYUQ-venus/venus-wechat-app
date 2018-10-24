@@ -50,9 +50,9 @@ page{
   background-size:contain;
   box-sizing: border-box;
   background-position: 0 0;
-  background-attachment:fixed; 
-  padding-bottom: 50rpx; 
-  padding-top: 50rpx; 
+  background-attachment:fixed;
+  padding-bottom: 50rpx;
+  padding-top: 50rpx;
 }
 .mainbox{
   width: 686rpx;
@@ -60,7 +60,7 @@ page{
   margin:0 auto;
   border-radius:15rpx;
   box-sizing: border-box;
-  overflow: scroll; 
+  overflow: scroll;
 }
 .logo{
   text-align: left;
@@ -76,16 +76,20 @@ page{
 .inputwarp{
   height: 50rpx;
   line-height: 50rpx;
-  overflow:hidden;
+  // overflow:hidden;
   border-bottom: 1rpx solid #eee;
   margin-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
 }
 .inputwarp input{
   font-size: 28rpx;
 }
 .label{
   font-size: 28rpx;
-  float: left;
+  // float: left;
+  width: 50%;
 }
 .placeholder{
   font-size: 26rpx;
@@ -94,10 +98,12 @@ page{
 .input-div input{
   float: right;
   text-align:right;
+  width: 100%;
 }
 .phoneinput{
   width: 300rpx;
-  float: left;
+  // float: left;
+  width: 50%;
   margin-left:25rpx;
 }
 .send{

@@ -1,7 +1,7 @@
 <!--pages/competition/mymessage/mymessage.wxml-->
 <view class='messagetit'>消息</view>
 <view class='messagewap'>
-    <view class='message_null'  wx:if="{{condition}}">
+    <view class='message_null'  wx:if="{{infoarr.length == 0}}">
         <image src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/nomessage.png'/>
         <text class='font'>暂无消息</text>
     </view>
@@ -62,5 +62,3 @@
       </view>
     </view>
 </view>
-
-

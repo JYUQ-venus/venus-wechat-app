@@ -1,4 +1,7 @@
 // pages/competition/myteam/myteam.js
+import * as api from '../../js/api'
+import * as util from '../../js/utils'
+
 Page({
   /**
    * 页面的初始数据
@@ -21,7 +24,47 @@ Page({
     userid:"",
     status:""
   },
-
+  /**
+ * 生命周期函数--监听页面加载
+ */
+  onLoad: function (options) {
+    // console.log('options.reviewStatus')
+    // console.log(options.reviewStatus)
+    // this.setData({
+    //   status: options.reviewStatus
+    // })
+    wx.showLoading({
+      title: '加载中',
+    })
+    // var that = this
+    let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {reviewStatus: options.reviewStatus})
+    api.getTeamDetails({data: parmas}).then(res => {
+      wx.hideLoading()
+      this.setData({
+        clubfinfo: res.data.club,
+        messagelist: res.data.clubMessageList,
+        gamedatarry: res.data.userListEventData,
+        gamehonorarry: res.data.userList,
+        signracelist: res.data.eventList,
+        userid: res.data.userId
+      })
+      var group = []
+      for (var i = 0; i < res.data.userListEventData.length; i++) {
+        if (res.data.userListEventData[i].captain == 1) {
+          this.setData({
+            "memberlistArray.leadername": res.data.userListEventData[i].name,
+            "memberlistArray.leaderhead": res.data.userListEventData[i].headimg,
+          })
+        } else {
+          group.push(res.data.userListEventData[i])
+          console.log(res.data.userListEventData[i])
+          this.setData({
+            "memberlistArray.memberdetail":group
+          })
+        }
+      }
+    })
+  },
   //选项卡
   selected: function () {
     this.setData({
@@ -84,121 +127,30 @@ Page({
   tip: function () {
     wx.showToast({
       title: '您无此权限',
-      image: '../../img/warn.png',
+      image: '../../images/warn.png',
       duration: 2000
     })
   },
-  /**
- * 生命周期函数--监听页面加载
- */
-  onLoad: function (options) {
-    console.log('options.reviewStatus')
-    console.log(options.reviewStatus)
-    this.setData({
-      status: options.reviewStatus
-    })
-    wx.showLoading({
-      title: '加载中',
-    })
-    var that = this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/queryClubDetailsCaptain',
-      data: {
-        thirdSession: wx.getStorageSync('thirdSession'),
-        reviewStatus:that.data.status
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
-        console.log(res)
-        wx.hideLoading()
-        that.setData({
-          clubfinfo: res.data.club,
-          messagelist: res.data.clubMessageList,
-          gamedatarry: res.data.userListEventData,
-          gamehonorarry: res.data.userList,
-          signracelist: res.data.eventList,
-          userid: res.data.userId
-        })
-        var group = []
-        for (var i = 0; i < res.data.userListEventData.length; i++) {
-          if (res.data.userListEventData[i].captain == 1) {
-            that.setData({
-              "memberlistArray.leadername": res.data.userListEventData[i].name,
-              "memberlistArray.leaderhead": res.data.userListEventData[i].headimg,
-            })
-          } else {
-            group.push(res.data.userListEventData[i])
-            console.log(res.data.userListEventData[i])
-            that.setData({
-              "memberlistArray.memberdetail":group
-            })
-          }
-        }
-      }
-    })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
     return {
       title: '快来加入我的球队',
-      path: '/pages/competition/register/register?clubId=' + that.data.clubfinfo.id + '&eventId=' + that.data.clubfinfo.eventId,
+      path: '/pages/competition/register/register?clubId=' + this.data.clubfinfo.id + '&eventId=' + this.data.clubfinfo.eventId,
       success: function (res) {
-        console.log(that.data.clubfinfo.id)
-        console.log(that.data.clubfinfo.eventId)
+        console.log(this.data.clubfinfo.id)
+        console.log(this.data.clubfinfo.eventId)
       },
       fail: function (res) {
         // 转发失败
       }
     }
+  },
+  // 监听用户下拉刷新动作
+  onPullDownRefresh: function(){
+    wx.reLaunch({
+      url: `/src/index`
+    })
   }
 })

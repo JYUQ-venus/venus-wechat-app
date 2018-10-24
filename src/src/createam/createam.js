@@ -1,4 +1,6 @@
 // pages/competition/createam/createam.js
+import * as api from '../../js/api'
+import * as util from '../../js/utils'
 Page({
   /**
    * 页面的初始数据
@@ -42,7 +44,7 @@ Page({
     if (this.data.teamlogosrc==""){
       wx.showToast({
         title: '请上传logo',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return
@@ -50,7 +52,7 @@ Page({
     if (this.data.teamname== "" || this.data.region==""){
       wx.showToast({
         title: '请完善信息',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return
@@ -69,7 +71,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         if(res.data.state==true){
           // wx.hideLoading()
           wx.uploadFile({
@@ -80,14 +82,14 @@ Page({
               "Content-Type": 'application/x-www-form-urlencoded'
             },
             success: function (res) {
-              console.log(res)
-              wx.setStorageSync('first', 0)
-              var resdata = JSON.parse(res.data)
+              // console.log(res)
+              // wx.setStorageSync('first', 0)
+              let resdata = JSON.parse(res.data)
               that.setData({
                 teamlogosrc: resdata.url
               })
-              var club = {
-                thirdSession: wx.getStorageSync('thirdSession'),
+              let club = {
+                thirdSession: wx.getStorageSync('sessionKey'),
                 clubLogo: that.data.teamlogosrc,
                 name: that.data.teamname,
                 city: that.data.region,
@@ -108,15 +110,13 @@ Page({
                   'content-type': 'application/x-www-form-urlencoded'
                 },
                 success: function (res) {
-                  console.log('创建球队')
-                  console.log(JSON.stringify(club))
-                  console.log(res)
+                  console.log(res,'--------res')
                   if (res.data.state == true) {
                     wx.hideLoading()
                     wx.showToast({
                       // 审核
                       title: '已提交',
-                      image: '../../img/subsuccess.png',
+                      image: '../../images/subsuccess.png',
                       duration: 2000
                     })
                     // let pages = getCurrentPages();//当前页面
@@ -126,12 +126,12 @@ Page({
                     // });
                     // wx.navigateBack(1)
                     wx.redirectTo({
-                      url: '../Z_index/Z_index',
+                      url: `/src/index`
                     })
                   }else{
                     wx.showToast({
                       title: '网络开小差了',
-                      image: '../../img/warn.png',
+                      image: '../../images/warn.png',
                       duration: 2000
                     })
                   }
@@ -142,13 +142,13 @@ Page({
         }else{
           wx.showToast({
             title: res.data.msg,
-            image: '../../img/warn.png',
+            image: '../../images/warn.png',
             duration: 2000
           })
         }
       }
     })
-   
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -158,72 +158,62 @@ Page({
       title: '加载中',
     })
     //根据thirdSession换取队长的名字
-    var that = this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/registerClubCaptain',
-      method: 'POST',
-      data: {
-        thirdSession: wx.getStorageSync('thirdSession'),
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        wx.hideLoading()
-        that.setData({
-          leadername: res.data.captain
-        })
-      }
+    api.getLeaderName({data: {
+      thirdSession: wx.getStorageSync('sessionKey')
+    }}).then(res => {
+      wx.hideLoading()
+      this.setData({
+        leadername: res.data.captain
+      })
     })
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

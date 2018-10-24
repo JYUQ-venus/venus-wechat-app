@@ -1,6 +1,18 @@
 {
   "pages": [
-    "src/index"
+    "src/index",
+    "src/register/register",
+    "src/myteam/myteam",
+    "src/teamset/teamset",
+    "src/editcity/editcity",
+    "src/editname/editname",
+    "src/editintro/editintro",
+    "src/mymessage/mymessage",
+    "src/raceintro/raceintro",
+    "src/jointeamdetail/jointeamdetail",
+    "src/teamlist/teamlist",
+    "src/createam/createam",
+    "src/nojointeamdetail/nojointeamdetail"
   ],
   "window":{
     "backgroundTextStyle": "dark",

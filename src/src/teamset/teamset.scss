@@ -1,5 +1,5 @@
 /* pages/competition/teamset/teamset.wxss */
-.clearfix:after{ 
+.clearfix:after{
     content: '';
     display: block;
     clear: both;
@@ -64,14 +64,17 @@
   background-size: contain;
   background-position: center;
   margin:80rpx auto 30rpx;
-  text-align: center;
+  // text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tip{
   font-size: 18rpx;
   text-align: center
 }
 .erweiwarp image{
-  margin-top:10rpx;
+  // margin-top:10rpx;
   width: 260rpx;
   height:260rpx;
 }

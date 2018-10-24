@@ -1,14 +1,5 @@
 <!--pages/competition/register.wxml-->
 <view class='mainbox'>
-
-  <view class='Nomodel' hidden='{{show}}'>
-    <view class='Notext'>
-      <image src='../../img/logo.png'></image>
-      <text>为保证您个人利益，请允许获取信息</text>
-      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确定</button>
-    </view>
-  </view>
-
   <view class='logo'>
     <image mode='aspectFit' class='logo-img' src='http://cdn.qmxsportseducation.com/eaststar/eaststardir/img/logo.png' />
   </view>
@@ -20,7 +11,7 @@
       </view>
     </view>
     <view class='inputwarp'>
-      <view class='label'>手机</view>
+      <view class='label' style="width: 50px;">手机</view>
       <view class='phoneinput'>
         <input type='number' placeholder='请输入手机号码(必填)' bindinput='changePhone' placeholder-class="placeholder" />
       </view>

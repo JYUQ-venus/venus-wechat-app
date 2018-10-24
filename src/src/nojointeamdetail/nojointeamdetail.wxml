@@ -1,11 +1,11 @@
 <!--pages/competition/nojointeamdetail/nojointeamdetail.wxml-->
 <view class='header'>
     <view class='teamlogo'>
-      <image src='{{teamlogosrc}}'/>
+      <image src='{{teamLeader.headimg}}'/>
     </view>
     <view class='teamcase'>
-       <text class='teamname'>{{teamname}}</text>
-        <view class='number'>球员人数：{{peoplenum}}人</view>
+       <text class='teamname'>{{teamLeader.name}}</text>
+        <view class='number'>球员人数：{{playerNum}}人</view>
         <view class='addr'>{{addrcity}}</view>
     </view>
     <view class="applybtn {{auditJoin == 0 ? ' ':'yes'}}"  bindtap='join'>{{auditJoin == 0 ? '申请加入':'已申请'}}</view>
@@ -18,21 +18,21 @@
   <!-- 球队成员 -->
   <view class="member_panel {{selected? 'show':'hidden'}}">
       <view class='leader'>
-        <image src='{{memberlistArray.leaderhead}}'/>
-        <text>{{memberlistArray.leadername}}(球队队长)</text>
+        <image src='{{teamLeader.headimg}}'/>
+        <text>{{teamLeader.name}}(球队队长)</text>
       </view>
       <view class='title'>
-        <text>— 队员({{memberlistArray.memberdetail.length}}人) —</text>
+        <text>— 队员({{playerNum - 1}}人) —</text>
       </view>
       <view class='memberwarp'>
-        <view class='member' wx:for="{{memberlistArray.memberdetail}}" wx:key="{{key}}">
+        <view class='member' wx:for="{{playerList}}" wx:key="{{key}}">
             <view class='detail'>
               <image src='{{item.headimg}}'/>
               <text>{{item.name}}</text>
             </view>
         </view>
       </view>
-  </view> 
+  </view>
   <!-- 比赛数据 -->
   <view class="game_panel {{selected1?'show':'hidden'}}">
      <view class="table">
@@ -42,7 +42,7 @@
             <view class="th">场均</view>
             <view class="th">得分</view>
         </view>
-        <view class="tr" wx:for="{{gamedatarry}}" wx:key="{{key}}">
+        <view class="tr" wx:for="{{playerList}}" wx:key="{{key}}">
             <view class="td">{{item.raceNumber}}</view>
             <view class="td qiuyuan" style='width:40%;text-align:left;margin-top:20rpx'>
               <image  class='touxiang' src='{{item.headimg}}'/>
@@ -55,5 +55,13 @@
             <view class="td">{{item.sumScore}}</view>
         </view>
     </view>
+  </view>
+</view>
+
+<view class='Nomodel' hidden='{{isAuthorization}}'>
+  <view class='Notext'>
+    <image src='../../images/logo.png'></image>
+    <text>为保证您个人利益，请允许获取信息</text>
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确定</button>
   </view>
 </view>

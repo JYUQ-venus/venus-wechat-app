@@ -7,7 +7,7 @@ var appConfig = {
       let that = this
       return new Promise ((resolve, result) => {
         util.wechatLogin().then((login) => {
-          console.log(login,'----------logins')
+          // console.log(login,'----------logins')
           that.weChatSignin(login.code, resolve, result)
         })
       })
@@ -25,13 +25,13 @@ var appConfig = {
       api.getWechatInfo({
         data: parmas
       }).then(json => {
+        wx.setStorageSync('sessionKey', json.data.thirdSession)
         self.getUserInfo(json.data.thirdSession, solve, sult)
       })
     },
     getUserInfo(sessionId, solve, sult){
       let parmas = Object.assign({}, {thirdSession: sessionId})
       api.getUserInfo({data: parmas}).then(json => {
-        console.log(json,'-----------json')
         wx.setStorageSync('userInfo', json.data)
         solve('ok')
         // util.setStorageSync({

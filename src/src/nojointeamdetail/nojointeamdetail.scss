@@ -78,24 +78,24 @@ page{
   box-sizing: border-box
 }
 .member_panel::before{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    left:70rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 
 .game_panel::after{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    left:254rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 .leader image{
@@ -174,4 +174,49 @@ page{
   width: 20%;
   float: left;
   font-size: 22rpx;
+}
+
+.Nomodel {
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+background: rgba(0, 0, 0, 0.4);
+z-index: 999;
+display: flex;
+}
+
+.Notext {
+width: 446rpx;
+height: 288rpx;
+background: #fff;
+margin: auto;
+vertical-align: center;
+border-radius: 10rpx;
+text-align: center;
+position: relative;
+}
+
+.Notext>image {
+width: 81rpx;
+height: 81rpx;
+margin: 0 auto;
+padding: 31rpx 0;
+}
+
+.Notext>text {
+font-size: 23rpx;
+color: #333;
+display: block;
+}
+
+.Notext>button {
+width: 100%;
+height: 70rpx;
+color: #ef933c;
+font-size: 25rpx;
+position: absolute;
+bottom: 0rpx;
+line-height: 70rpx;
+border-top: 1px solid #ededf1;
 }

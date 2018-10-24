@@ -1,4 +1,7 @@
 // pages/competition/register.js
+import * as api from '../../js/api'
+import * as util from '../../js/utils'
+
 const app = getApp()
 Page({
   /**
@@ -48,7 +51,7 @@ Page({
     if (phone == "") {
       wx.showToast({
         title: '请填写手机号',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -56,7 +59,7 @@ Page({
     if (!(/^1[34578]\d{9}$/.test(phone))) {
       wx.showToast({
         title: '手机号格式有误',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -66,22 +69,12 @@ Page({
       for (var i = 0; i < 4; i++) {
         content += Math.floor(Math.random() * 10);
       }
-      wx.request({
-        url: "https://slb.qmxsportseducation.com/eastStarEvent/smss/verificationCode",
-        method: 'POST',
-        data: {
-          mobiles: phone,
-          content: content
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
-        },
-        success: function (res) {
-          if (res.data == "OK") {
-            that.setData({
-              verificationCode: content
-            })
-          }
+      let parmas = Object.assign({}, {mobiles: phone}, {content: content})
+      api.getVerCode({data: parmas}).then(res => {
+        if (res.data == "OK") {
+          that.setData({
+            verificationCode: content
+          })
         }
       })
       that.data.codeflag = false
@@ -178,23 +171,23 @@ Page({
       }
     })
   },
-  onGotUserInfo: function (e) {
-    var that = this;
-
-    if (e.detail.userInfo != null) {
-      if (e.detail.userInfo.nickName != '' && e.detail.userInfo.nickName != null) {
-        wx.setStorageSync('nickName', e.detail.userInfo.nickName);
-      }
-      if (e.detail.userInfo.avatarUrl != '' && e.detail.userInfo.avatarUrl != null) {
-        wx.setStorageSync('avatarUrl', e.detail.userInfo.avatarUrl);
-      }
-    }
-
-    that.setData({
-      show: true
-    })
-    // that.onLoad();
-  },
+  // onGotUserInfo: function (e) {
+  //   var that = this;
+  //
+  //   if (e.detail.userInfo != null) {
+  //     if (e.detail.userInfo.nickName != '' && e.detail.userInfo.nickName != null) {
+  //       wx.setStorageSync('nickName', e.detail.userInfo.nickName);
+  //     }
+  //     if (e.detail.userInfo.avatarUrl != '' && e.detail.userInfo.avatarUrl != null) {
+  //       wx.setStorageSync('avatarUrl', e.detail.userInfo.avatarUrl);
+  //     }
+  //   }
+  //
+  //   that.setData({
+  //     show: true
+  //   })
+  //   // that.onLoad();
+  // },
   //注册
   bindSubmitTap: function () {
     wx.showLoading({
@@ -209,7 +202,7 @@ Page({
     if (that.data.username == "" || that.data.userphone == "" || that.data.userheight == "" || that.data.userweight == "" || that.data.useridentity == "") {
       wx.showToast({
         title: '信息不完整',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -217,7 +210,7 @@ Page({
     if (that.data.imgsrc == "") {
       wx.showToast({
         title: '请上传证件照',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -225,7 +218,7 @@ Page({
     if (that.data.codenum != that.data.verificationCode) {
       wx.showToast({
         title: '验证码不正确',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -234,7 +227,7 @@ Page({
     if (that.data.useridentity.idCard !== "" && isIDCard1.test(that.data.useridentity) == false) {
       wx.showToast({
         title: '身份证格式不正确',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -252,12 +245,13 @@ Page({
         that.setData({
           imgsrc: resdata.url
         })
+        let userInfo = wx.getStorageSync('wechatInfo')
         let people = {
-          thirdSession: wx.getStorageSync('thirdSession'),
+          thirdSession: wx.getStorageSync('sessionKey'),
           captain: 0,
           auditJoin: 0,
-          headimg: that.data.userheadimg,
-          nickname: that.data.usernickname,
+          headimg: userInfo.avatarUrl,
+          nickname: userInfo.nickName,
           name: that.data.username,
           sex: that.data.usersex,
           birthday: that.data.userbirthday,
@@ -273,32 +267,22 @@ Page({
           profilePicture: that.data.imgsrc
         }
         var _this = that
-        wx.request({
-          url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/registerUser',
-          method: 'POST',
-          data: {
-            user: JSON.stringify(people),
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            wx.hideLoading()
-            wx.showToast({
-              title: '提交成功',
-              image: '../../img/subsuccess.png',
-              duration: 2000
+        api.postSignInfo({data: {user: JSON.stringify(people)}}).then(res => {
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交成功',
+            image: '../../images/subsuccess.png',
+            duration: 2000
+          })
+          if (_this.data.clubId != undefined) {
+            wx.redirectTo({
+              url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId='+ _this.data.eventId + '&auditJoin=0',
             })
-            if (_this.data.clubId != undefined) {
-              wx.redirectTo({
-                url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId='+ _this.data.eventId + '&auditJoin=0',
-              })
-            } else {
-              wx.redirectTo({
-                url: '../teamlist/teamlist',
-              })
-            }
-          },
+          } else {
+            wx.redirectTo({
+              url: `/src/index`
+            })
+          }
         })
       }
     })
@@ -315,78 +299,78 @@ Page({
       clubId: options.clubId,
       eventId: options.eventId,
     })
-    var that = this
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://slb.qmxsportseducation.com/eastStarEvent/wx/onLogin',
-            // method: "POST",
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            data: {
-              code: res.code
-            },
-            success: function (a) {
-              wx.setStorageSync('thirdSession', a.data.thirdSession)
-              wx.request({
-                url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/loginUser',
-                method: 'POST',
-                data: {
-                  thirdSession: wx.getStorageSync('thirdSession')
-                },
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded'
-                },
-                success: function (res) {
-                  wx.hideLoading()
-                  var _this = that
-                  if (res.data.user != null) {
-                    var people = {
-                      thirdSession: wx.getStorageSync('thirdSession')
-                    }
-                    wx.request({
-                      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/registerUser',
-                      data: {
-                        user: JSON.stringify(people),
-                      },
-                      method: 'POST',
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                      },
-                      success: function (res) {
-                        wx.hideLoading()
-                        if (res.data.reviewStatus == 2) {
-                          wx.redirectTo({
-                            url: '../myteam/myteam?reviewStatus=' + res.data.reviewStatus + '',
-                          })
-                        } else if (res.data.reviewStatus == 0) {
-                          wx.redirectTo({
-                            url: '../jointeamdetail/jointeamdetail?reviewStatus=' + res.data.reviewStatus + '',
-                          })
-                        } else {
-                          if (_this.data.clubId != undefined) {
-                            wx.redirectTo({
-                              url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId=' + _this.data.eventId + '&auditJoin=0',
-                            })
-                          } else {
-                            wx.redirectTo({
-                              url: '../teamlist/teamlist',
-                            })
-                          }
-                        }
-                      }
-                    })
-                  }
-                }
-              })
-            }
-          })
-        }
-      }
-    })
+    // var that = this
+    // wx.login({
+    //   success: function (res) {
+    //     if (res.code) {
+    //       //发起网络请求
+    //       wx.request({
+    //         url: 'https://slb.qmxsportseducation.com/eastStarEvent/wx/onLogin',
+    //         // method: "POST",
+    //         header: {
+    //           "Content-Type": "application/x-www-form-urlencoded"
+    //         },
+    //         data: {
+    //           code: res.code
+    //         },
+    //         success: function (a) {
+    //           wx.setStorageSync('sessionKey', a.data.thirdSession)
+    //           wx.request({
+    //             url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/loginUser',
+    //             method: 'POST',
+    //             data: {
+    //               thirdSession: wx.getStorageSync('sessionKey')
+    //             },
+    //             header: {
+    //               'content-type': 'application/x-www-form-urlencoded'
+    //             },
+    //             success: function (res) {
+    //               wx.hideLoading()
+    //               var _this = that
+    //               if (res.data.user != null) {
+    //                 var people = {
+    //                   thirdSession: wx.getStorageSync('sessionKey')
+    //                 }
+    //                 wx.request({
+    //                   url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/registerUser',
+    //                   data: {
+    //                     user: JSON.stringify(people),
+    //                   },
+    //                   method: 'POST',
+    //                   header: {
+    //                     'content-type': 'application/x-www-form-urlencoded'
+    //                   },
+    //                   success: function (res) {
+    //                     wx.hideLoading()
+    //                     if (res.data.reviewStatus == 2) {
+    //                       wx.redirectTo({
+    //                         url: '../myteam/myteam?reviewStatus=' + res.data.reviewStatus + '',
+    //                       })
+    //                     } else if (res.data.reviewStatus == 0) {
+    //                       wx.redirectTo({
+    //                         url: '../jointeamdetail/jointeamdetail?reviewStatus=' + res.data.reviewStatus + '',
+    //                       })
+    //                     } else {
+    //                       if (_this.data.clubId != undefined) {
+    //                         wx.redirectTo({
+    //                           url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId=' + _this.data.eventId + '&auditJoin=0',
+    //                         })
+    //                       } else {
+    //                         wx.redirectTo({
+    //                           url: `/src/index`,
+    //                         })
+    //                       }
+    //                     }
+    //                   }
+    //                 })
+    //               }
+    //             }
+    //           })
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
   },
 
   /**
@@ -399,15 +383,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-     var userheadimg = wx.getStorageSync('avatarUrl')
-     var usernickname = wx.getStorageSync('nickName')
-     console.log(userheadimg)
-     console.log(usernickname)
-     if (usernickname == '' && userheadimg == ''){
-       this.setData({
-         show: false
-       })
-     }
+     // var usernickname = wx.getStorageSync('nickName')
+     // console.log(userheadimg)
+     // console.log(usernickname)
+     // if (usernickname == '' && userheadimg == ''){
+     //   this.setData({
+     //     show: false
+     //   })
+     // }
   },
 
   /**

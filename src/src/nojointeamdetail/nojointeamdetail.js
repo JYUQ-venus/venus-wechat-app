@@ -1,4 +1,9 @@
 // pages/competition/nojointeamdetail/nojointeamdetail.js
+import * as api from '../../js/api'
+import * as util from '../../js/utils'
+
+var app = getApp()
+
 Page({
   /**
    * 页面的初始数据
@@ -12,39 +17,87 @@ Page({
     addrcity:"",
     clubid:"",
     auditJoin:"",
-    memberlistArray:{
-       leadername:"",
-       leaderhead:"",
-       memberdetail:[]
-    },
-    gamedatarry: []
+    gamedatarry: [],
+    isAuthorization: true,
+    playerNum: 1
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let self = this
+    self.setData({
+      options: options
+    })
+    wx.getSetting({
+      success: function(res){
+        if(res.authSetting['scope.userInfo']){
+          self.initData()
+        }else{
+          self.setData({
+            isAuthorization: false
+          })
+        }
+      }
+    })
+
+  },
+  initData(){
+    const { options } = this.data
+    let parmas = Object.assign({}, {id: options.id}, {eventId: options.eventId}, {thirdSession: wx.getStorageSync('sessionKey')})
+    api.getClubPeopleDetails({data: parmas}).then(res => {
+      let data = res.data
+      if(data.state){
+        let teamLeader = data.userListEventData.find(json => json.captain == 1)
+        this.setData({
+          teamLeader: teamLeader,
+          teamlogosrc: data.club.clubLogo,
+          teamname: data.club.name,
+          addrcity: data.club.city,
+          clubid: data.club.id,
+          playerList: data.userListEventData,
+          playerNum: data.userListEventData.length,
+          auditJoin: data.auditJoin
+        })
+      }
+    })
   },
   //申请加入
   join:function(){
-    if (this.data.auditJoin!= 0){
+    if (this.data.auditJoin != 0){
       return
     }else{
-      var that = this
-      wx.request({
-        url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/applyJoinClub',
-        data: {
-          thirdSession: wx.getStorageSync('thirdSession'),
-          clubId:that.data.clubid,
-          auditJoin: 1
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
-        },
-        success: function (res) {
-          if(res.data.state==true){
-            that.setData({
-              auditJoin:1,
-            })
-          }
+      let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {clubId: this.data.clubid}, {auditJoin: 1})
+      api.applyAddTeam({data: parmas}).then(res => {
+        if(res.data.state){
+          this.setData({
+            auditJoin:1,
+          })
         }
       })
     }
+  },
+  onGotUserInfo: function(e){
+    util.setStorageSync({
+      key: 'userInfo',
+      data: e.detail.userInfo
+    })
+    this.setData({
+      isAuthorization: true
+    }, () => {
+      app.getWechatInfo('other').then(res => {
+        if(res == 'ok'){
+          const { user } = wx.getStorageSync('userInfo')
+          if (user == null) {
+            wx.redirectTo({
+              url: `/src/register/register`,
+            })
+          }else{
+            this.initData()
+          }
+        }
+      })
+    })
   },
   //选项卡
   selected:function(){
@@ -59,105 +112,10 @@ Page({
       selected:false
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options,'-----------options')
-    this.setData({
-      auditJoin:options.auditJoin
+  // 监听用户下拉刷新动作
+  onPullDownRefresh: function(){
+    wx.reLaunch({
+      url: `/src/index`
     })
-    var that= this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/queryClubDetails',
-      data: {
-        id: options.id,
-        eventId: options.eventId
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res, '----------????')
-        if (res.data.state==true){
-          that.setData({
-            teamlogosrc: res.data.club.clubLogo,
-            teamname: res.data.club.name,
-            peoplenum: res.data.club.numberPlayers,
-            addrcity: res.data.club.city,
-            clubid: res.data.club.id,
-            gamedatarry: res.data.userListEventData
-          })
-          var group = []
-          for (let i = 0; i < res.data.userListEventData.length;i++){
-            if (res.data.userListEventData[i].captain==1){
-              that.setData({
-                "memberlistArray.leadername":res.data.userListEventData[i].name,
-                "memberlistArray.leaderhead":res.data.userListEventData[i].headimg
-              })
-            }else{
-              group.push(res.data.userListEventData[i])
-              that.setData({
-                "memberlistArray.memberdetail": group
-              })
-            }
-          }
-        }
-      }
-    })
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

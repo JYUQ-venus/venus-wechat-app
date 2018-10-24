@@ -20,7 +20,7 @@ Page({
     inputteamleader:"",
     inputleaderphone:""
   },
-  
+
   //选择所在城市地点
   bindPickercityChange: function (e) {
     console.log(e)
@@ -66,13 +66,10 @@ Page({
       cName:that.data.teamname,
       eventGroupId: that.data.egid
     }
-    console.log('that.data.egid=' + that.data.egid)
-    console.log('that.data.inputteamleader=' + that.data.inputteamleader)
-    console.log('that.data.inputleaderphone=' + that.data.inputleaderphone)
     if (that.data.egid == "" || that.data.inputteamleader == "" || that.data.inputleaderphone == ""){
       wx.showToast({
         title: '请完善报名信息132',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
@@ -80,13 +77,13 @@ Page({
     if (!(/^1[34578]\d{9}$/.test(that.data.inputleaderphone))) {
       wx.showToast({
         title: '手机号格式有误',
-        image: '../../img/warn.png',
+        image: '../../images/warn.png',
         duration: 2000
       })
       return;
     }
     wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxEvent/addRegistrationInformation', 
+      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxEvent/addRegistrationInformation',
       data: {
         eventClub: eventClub
       },
@@ -100,7 +97,7 @@ Page({
           duration: 2000
         })
         wx.redirectTo({
-          url:'../Z_index/Z_index',
+          url:`/src/index`,
         })
       }
     })
@@ -149,8 +146,6 @@ Page({
           signcityArray: cityaddrarr,
           array: groplist
         })
-
-        console.log(res.data)
       }
     })
   },
@@ -159,14 +154,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
@@ -191,20 +186,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
