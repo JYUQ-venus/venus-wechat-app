@@ -57,7 +57,7 @@ Page({
       return
     }
     if (user.auditJoin == 2) {
-      console.log('是否是队长' + user.captain)
+      // console.log('是否是队长' + user.captain)
       if (user.captain == 0) {
         wx.redirectTo({
           url: `/src/jointeamdetail/jointeamdetail?id=${user.clubId}&eventId=${user.eId}&auditJoin=${user.auditJoin}`,

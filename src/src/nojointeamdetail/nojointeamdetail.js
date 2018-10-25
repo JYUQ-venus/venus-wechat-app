@@ -69,11 +69,18 @@ Page({
     }else{
       let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {clubId: this.data.clubid}, {auditJoin: 1})
       api.applyAddTeam({data: parmas}).then(res => {
-        if(res.data.state){
-          this.setData({
-            auditJoin:1,
+        let data = res.data
+        if(data.captain == 1 || (data.players == 1 && auditJoin == 2)){
+          wx.showModal({
+            title: '提示',
+            content: '您已在其他球队内，不能申请其他球队',
+            showCancel: false
           })
+          return
         }
+        this.setData({
+          auditJoin: 1
+        })
       })
     }
   },

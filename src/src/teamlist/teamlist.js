@@ -25,14 +25,6 @@ Page({
     // var that=this
     let { city } = this.data
     let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')})
-    wx.checkSession({
-      success: function(res){
-        console.log('没有过期',res)
-      },
-      fail: function(e){
-        console.log(e,'---过期')
-      }
-    })
     api.isCreatedSuccessfully({data: {user: JSON.stringify(parmas)}}).then(res => {
       if(res.data.reviewStatus == 2){
         wx.redirectTo({
