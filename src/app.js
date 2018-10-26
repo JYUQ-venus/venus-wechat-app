@@ -7,7 +7,6 @@ var appConfig = {
       let that = this
       return new Promise ((resolve, result) => {
         util.wechatLogin().then((login) => {
-          // console.log(login,'----------logins')
           that.weChatSignin(login.code, resolve, result)
         })
       })

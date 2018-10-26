@@ -36,7 +36,6 @@ Page({
     api.getTeamDetails({data: parmas}).then(json => {
       let data = json.data
       let teamLeader = data.userListEventData.find(json => json.captain == 1)
-      console.log(teamLeader,'-----------json')
       let capIndex = data.userListEventData.findIndex(json => json.id == teamLeader.id)
       data.userListEventData.splice(capIndex, 1)
       this.setData({
@@ -64,7 +63,6 @@ Page({
 
     // var that = this
     const { clubInfo } = this.data
-    console.log('that.data.clubfinfo.id===' + clubInfo.id)
     wx.navigateTo({
       url: `/src/teamset/teamset?clubId=${clubInfo.id}`,
     })
@@ -150,7 +148,6 @@ Page({
     var that = this
     const { clubInfo } = this.data
     // const { user } = wx.getStorageSync('userInfo')
-    console.log(clubInfo)
     return {
       title: '快来加入我的球队',
       path: `/src/index?id=${clubInfo.id}&&eventId=${clubInfo.eventId}&&status=share`

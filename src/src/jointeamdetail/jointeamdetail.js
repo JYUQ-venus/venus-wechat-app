@@ -57,7 +57,6 @@ Page({
           })
         } else {
           group.push(res.data.userListEventData[i])
-          console.log(res.data.userListEventData[i])
           this.setData({
             "memberlistArray.memberdetail":group
           })
@@ -135,16 +134,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    const { clubfinfo } = this.data
     return {
       title: '快来加入我的球队',
-      path: '/pages/competition/register/register?clubId=' + this.data.clubfinfo.id + '&eventId=' + this.data.clubfinfo.eventId,
-      success: function (res) {
-        console.log(this.data.clubfinfo.id)
-        console.log(this.data.clubfinfo.eventId)
-      },
-      fail: function (res) {
-        // 转发失败
-      }
+      path: `/src/index?id=${clubfinfo.id}&&eventId=${clubfinfo.eventId}&&status=share`
     }
   },
   // 监听用户下拉刷新动作

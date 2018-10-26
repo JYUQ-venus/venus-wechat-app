@@ -23,7 +23,6 @@ Page({
 
   //选择所在城市地点
   bindPickercityChange: function (e) {
-    console.log(e)
     this.setData({
       addressindex: e.detail.value,
     })

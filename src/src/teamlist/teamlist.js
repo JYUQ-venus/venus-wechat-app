@@ -26,7 +26,7 @@ Page({
     let { city } = this.data
     let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')})
     api.isCreatedSuccessfully({data: {user: JSON.stringify(parmas)}}).then(res => {
-      if(res.data.reviewStatus == 2){
+      if(res.data.auditJoinOneself == 2){
         wx.redirectTo({
           url: `/src/index`
         })
@@ -136,6 +136,12 @@ Page({
     wx.navigateTo({
       url: `/src/nojointeamdetail/nojointeamdetail?id=${teamid}&&eventId=${eventId}`
       // url: '../Z_index/Z_index',
+    })
+  },
+  // 监听用户下拉刷新动作
+  onPullDownRefresh: function(){
+    wx.reLaunch({
+      url: `/src/index`
     })
   }
 })

@@ -37,7 +37,6 @@ Page({
   },
   //查看信息
   viewdetails:function(e){
-    console.log(e.currentTarget.dataset.id)
     var that = this
     wx.request({
       url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/queryRegisterUser',
@@ -48,7 +47,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res.data.userObject)
         that.setData({
           user_info: res.data.userObject,
           switchts : false
@@ -67,7 +65,6 @@ Page({
   // 点击同意
   agree:function(e){
     var that = this
-    console.log(wx.getStorageSync('thirdSession'))
     wx.request({
       url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/updateClubUserStatus',
       data: {
@@ -80,7 +77,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res)
         var arr = that.data.infoarr;
         var index = e.target.dataset.index;
         if (arr[index].auditJoin == 1) {

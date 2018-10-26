@@ -171,24 +171,6 @@ Page({
       }
     })
   },
-  // onGotUserInfo: function (e) {
-  //   var that = this;
-  //
-  //   if (e.detail.userInfo != null) {
-  //     if (e.detail.userInfo.nickName != '' && e.detail.userInfo.nickName != null) {
-  //       wx.setStorageSync('nickName', e.detail.userInfo.nickName);
-  //     }
-  //     if (e.detail.userInfo.avatarUrl != '' && e.detail.userInfo.avatarUrl != null) {
-  //       wx.setStorageSync('avatarUrl', e.detail.userInfo.avatarUrl);
-  //     }
-  //   }
-  //
-  //   that.setData({
-  //     show: true
-  //   })
-  //   // that.onLoad();
-  // },
-  //注册
   bindSubmitTap: function () {
     wx.showLoading({
       title: '请等待',
@@ -269,6 +251,14 @@ Page({
         var _this = that
         api.postSignInfo({data: {user: JSON.stringify(people)}}).then(res => {
           wx.hideLoading()
+          if(res.data.registered == 1){
+            wx.showModal({
+              title: '提示',
+              content: '您已注册过，不能重复注册',
+              showCancel: false
+            })
+            return
+          }
           wx.showToast({
             title: '提交成功',
             image: '../../images/subsuccess.png',
@@ -292,141 +282,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
     this.setData({
       clubId: options.clubId,
       eventId: options.eventId,
     })
-    // var that = this
-    // wx.login({
-    //   success: function (res) {
-    //     if (res.code) {
-    //       //发起网络请求
-    //       wx.request({
-    //         url: 'https://slb.qmxsportseducation.com/eastStarEvent/wx/onLogin',
-    //         // method: "POST",
-    //         header: {
-    //           "Content-Type": "application/x-www-form-urlencoded"
-    //         },
-    //         data: {
-    //           code: res.code
-    //         },
-    //         success: function (a) {
-    //           wx.setStorageSync('sessionKey', a.data.thirdSession)
-    //           wx.request({
-    //             url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/loginUser',
-    //             method: 'POST',
-    //             data: {
-    //               thirdSession: wx.getStorageSync('sessionKey')
-    //             },
-    //             header: {
-    //               'content-type': 'application/x-www-form-urlencoded'
-    //             },
-    //             success: function (res) {
-    //               wx.hideLoading()
-    //               var _this = that
-    //               if (res.data.user != null) {
-    //                 var people = {
-    //                   thirdSession: wx.getStorageSync('sessionKey')
-    //                 }
-    //                 wx.request({
-    //                   url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/registerUser',
-    //                   data: {
-    //                     user: JSON.stringify(people),
-    //                   },
-    //                   method: 'POST',
-    //                   header: {
-    //                     'content-type': 'application/x-www-form-urlencoded'
-    //                   },
-    //                   success: function (res) {
-    //                     wx.hideLoading()
-    //                     if (res.data.reviewStatus == 2) {
-    //                       wx.redirectTo({
-    //                         url: '../myteam/myteam?reviewStatus=' + res.data.reviewStatus + '',
-    //                       })
-    //                     } else if (res.data.reviewStatus == 0) {
-    //                       wx.redirectTo({
-    //                         url: '../jointeamdetail/jointeamdetail?reviewStatus=' + res.data.reviewStatus + '',
-    //                       })
-    //                     } else {
-    //                       if (_this.data.clubId != undefined) {
-    //                         wx.redirectTo({
-    //                           url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId=' + _this.data.eventId + '&auditJoin=0',
-    //                         })
-    //                       } else {
-    //                         wx.redirectTo({
-    //                           url: `/src/index`,
-    //                         })
-    //                       }
-    //                     }
-    //                   }
-    //                 })
-    //               }
-    //             }
-    //           })
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-     // var usernickname = wx.getStorageSync('nickName')
-     // console.log(userheadimg)
-     // console.log(usernickname)
-     // if (usernickname == '' && userheadimg == ''){
-     //   this.setData({
-     //     show: false
-     //   })
-     // }
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

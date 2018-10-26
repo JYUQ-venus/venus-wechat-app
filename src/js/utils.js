@@ -82,7 +82,7 @@ export const wechatLogin = () => {
           resolve(loginres)
         },
         fail (res){
-          result('errorLogin')
+          result(res,'errorLogin')
         }
       })
     } else {

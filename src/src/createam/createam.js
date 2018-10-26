@@ -110,7 +110,6 @@ Page({
                   'content-type': 'application/x-www-form-urlencoded'
                 },
                 success: function (res) {
-                  console.log(res,'--------res')
                   if (res.data.state == true) {
                     wx.hideLoading()
                     wx.showToast({
