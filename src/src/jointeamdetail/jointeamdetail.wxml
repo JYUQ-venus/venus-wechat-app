@@ -4,7 +4,7 @@
       <image src='{{clubfinfo.clubLogo}}'/>
     </view>
     <view class='teamcase'>
-       <view class='teamname'>{{clubfinfo.name}}</view> 
+       <view class='teamname'>{{clubfinfo.name}}</view>
         <text>球员人数：{{clubfinfo.numberPlayers}}人</text>
         <text>{{clubfinfo.city}}</text>
     </view>
@@ -17,7 +17,7 @@
     <view class="{{selected?'orange':''}}" bindtap="selected">球队成员</view>
     <view class="{{selected1?'orange':''}}" bindtap="selected1">比赛数据</view>
      <view class="{{selected2?'orange':''}}" bindtap="selected2">比赛荣誉</view>
-    <view class="{{selected3?'orange':''}}" bindtap="selected3">报名赛事</view> 
+    <view class="{{selected3?'orange':''}}" bindtap="selected3">报名赛事</view>
   </view>
    <!-- 球队成员 -->
   <view class="member_panel {{selected? 'show':'hidden'}}">
@@ -34,13 +34,13 @@
               <view class='target' wx:if="{{item.id==userid}}"></view>
               <view class="detailwarp">
                 <image src='{{item.headimg}}'/>
-                <view style='font-size:28rpx;margin-bottom:15rpx'>{{item.name}}</view>
+                <view style='font-size:28rpx;margin-bottom:15rpx; word-wrap:break-all;'>{{item.name}}</view>
                 <view class='caseone'>位置：{{item.teamPosition}}</view>
                 <view class='casetwo'>背号：{{item.raceNumber}}</view>
               </view>
             </view>
       </view>
-  </view> 
+  </view>
   <!-- 比赛数据 -->
   <view class="game_panel {{selected1?'show':'hidden'}}">
      <view class="table">
@@ -87,7 +87,7 @@
               </view>
           </view>
     </view>
-  </view> 
+  </view>
   <!-- 报名赛事-->
     <view class="signrace {{selected3?'show':'hidden'}}">
       <view wx:for="{{signracelist}}"  wx:for-item="i"  wx:key="{{key}}" class='race'>
@@ -103,5 +103,5 @@
           <view class='addr'>{{j.address}}</view>
         </view>
       </view>
-  </view> 
+  </view>
 </view>

@@ -214,7 +214,7 @@ Page({
       })
       return;
     }
-
+    console.log(that.data.imgsrc[0])
     wx.uploadFile({
       url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',
       filePath: that.data.imgsrc[0],
@@ -224,9 +224,9 @@ Page({
       },
       success: function (res) {
         var resdata = JSON.parse(res.data)
-        that.setData({
-          imgsrc: resdata.url
-        })
+        // that.setData({
+        //   imgsrc: resdata.url
+        // })
         let userInfo = wx.getStorageSync('wechatInfo')
         let people = {
           thirdSession: wx.getStorageSync('sessionKey'),
@@ -246,7 +246,7 @@ Page({
           raceNumber: that.data.usernum,
           teamPosition: that.data.userposition,
           introduction: that.data.userintroduce,
-          profilePicture: that.data.imgsrc
+          profilePicture: that.data.imgsrc[0]
         }
         var _this = that
         api.postSignInfo({data: {user: JSON.stringify(people)}}).then(res => {
@@ -274,6 +274,9 @@ Page({
             })
           }
         })
+      },
+      fail: function(e){
+        // console.log(e,'------------e')
       }
     })
   },

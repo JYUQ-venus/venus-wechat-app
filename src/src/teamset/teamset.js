@@ -23,7 +23,7 @@ Page({
         // // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths[0]
         wx.uploadFile({
-          url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',  
+          url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',
           filePath: tempFilePaths,
           name: 'file',
           header: {
@@ -48,7 +48,7 @@ Page({
               }
             })
           }
-        })  
+        })
       }
     })
   },
@@ -75,7 +75,7 @@ Page({
   dissolve:function(){
     var that=this
     wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/updateClubStatus', 
+      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/updateClubStatus',
       data: {
         id: that.data.clubId,
         clubStatus:1,
@@ -92,13 +92,14 @@ Page({
         })
       }
     })
-   
+
   },
   // 预览二维码
   previmg:function(){
+    const { qrcode } = this.data
     wx.previewImage({
-      current: 'http://cdn,qmxsportseducation.com/upload/filePath/52320180228161245.png',
-      urls: ['http://cdn.qmxsportseducation.com/upload/filePath/52320180228161245.png']
+      current: qrcode,
+      urls: [qrcode]
     })
   },
   /**
@@ -151,34 +152,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

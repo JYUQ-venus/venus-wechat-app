@@ -35,7 +35,7 @@
            <view class='kickout' catchtap='del' data-userid="{{item.id}}"></view>
            <view class="detailwarp">
              <image src='{{item.headimg}}'/>
-             <view style='font-size:28rpx;margin-bottom:15rpx'>{{item.name}}</view>
+             <view style='font-size:28rpx;margin-bottom:15rpx; word-wrap:break-all;'>{{item.name}}</view>
              <view class='caseone'>位置：{{item.teamPosition}}</view>
              <view class='casetwo'>背号：{{item.raceNumber}}</view>
              <view class='renming' data-playid='{{item.id}}' data-clubid='{{clubInfo.id}}' catchtap='bindrenming'>任命为队长</view>
