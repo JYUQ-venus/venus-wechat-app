@@ -27,7 +27,7 @@ Page({
     let self = this
     wx.getSetting({
       success: function(res){
-        if(res.authSetting['scope.userInfo']){
+        if(res.authSetting['scope.userInfo'] && wx.getStorageSync('wechatInfo')){
           app.getWechatInfo().then(res => {
             if(res == 'ok'){
               self.initData()
@@ -75,18 +75,24 @@ Page({
   },
   // 获取授权信息
   onGotUserInfo: function(e){
-    util.setStorageSync({
-      key: 'wechatInfo',
-      data: e.detail.userInfo
-    })
-    this.setData({
-      isAuthorization: true
-    }, () => {
-      app.getWechatInfo().then(res => {
-        if(res == 'ok'){
-          this.initData()
-        }
+    if(e.detail.userInfo){
+      util.setStorageSync({
+        key: 'wechatInfo',
+        data: e.detail.userInfo
       })
-    })
+      this.setData({
+        isAuthorization: true
+      }, () => {
+        app.getWechatInfo().then(res => {
+          if(res == 'ok'){
+            this.initData()
+          }
+        })
+      })
+    }else{
+      this.setData({
+        isAuthorization: false
+      })
+    }
   }
 })
