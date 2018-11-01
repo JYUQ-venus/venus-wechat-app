@@ -46,7 +46,8 @@ Page({
         gamedatarry: res.data.userListEventData,
         gamehonorarry: res.data.userList,
         signracelist: res.data.eventList,
-        userid: res.data.userId
+        userid: res.data.userId,
+        peopleList: res.data.uList
       })
       var group = []
       for (var i = 0; i < res.data.userListEventData.length; i++) {

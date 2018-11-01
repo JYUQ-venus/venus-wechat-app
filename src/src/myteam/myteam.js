@@ -44,6 +44,7 @@ Page({
         messagelist: data.clubMessageList,
         playerNum: data.userListEventData.length,
         playerList: data.userListEventData,
+        peopleList: data.uList,
         signracelist: data.eventList,
         gamehonorarry: data.userList,
         userId: data.userId

@@ -57,6 +57,7 @@ Page({
           numberPlayers: data.club.numberPlayers,
           clubid: data.club.id,
           playerList: data.userListEventData,
+          peopleList: data.uList,
           playerNum: data.userListEventData.length,
           auditJoin: data.auditJoin
         })

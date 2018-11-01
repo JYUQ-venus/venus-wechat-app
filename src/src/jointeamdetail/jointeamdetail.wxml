@@ -27,10 +27,10 @@
         <!-- <view class='message' bindtap='bindmessage'>消息({{message}})</view> -->
       </view>
       <view class='title'>
-        <text>— 队员({{memberlistArray.memberdetail.length}}人) —</text>
+        <text>— 队员({{clubfinfo.numberPlayers}}人) —</text>
       </view>
       <view class='memberwarp clearfix'>
-            <view class='detail' wx:for="{{memberlistArray.memberdetail}}" wx:key="{{key}}">
+            <view class='detail' wx:for="{{peopleList}}" wx:key="{{key}}">
               <view class='target' wx:if="{{item.id==userid}}"></view>
               <view class="detailwarp">
                 <image src='{{item.headimg}}'/>
