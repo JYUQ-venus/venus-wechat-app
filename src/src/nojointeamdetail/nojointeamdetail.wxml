@@ -1,11 +1,11 @@
 <!--pages/competition/nojointeamdetail/nojointeamdetail.wxml-->
 <view class='header'>
     <view class='teamlogo'>
-      <image src='{{teamLeader.headimg}}'/>
+      <image src='{{teamlogosrc}}'/>
     </view>
     <view class='teamcase'>
-       <text class='teamname'>{{teamLeader.name}}</text>
-        <view class='number'>球员人数：{{playerNum}}人</view>
+       <text class='teamname'>{{teamname}}</text>
+        <view class='number'>球员人数：{{numberPlayers}}人</view>
         <view class='addr'>{{addrcity}}</view>
     </view>
     <view class="applybtn {{auditJoin == 0 ? ' ':'yes'}}"  bindtap='join'>{{auditJoin == 0 ? '申请加入':'已申请'}}</view>

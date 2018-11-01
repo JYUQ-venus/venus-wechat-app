@@ -117,7 +117,7 @@ Page({
            duration: 2000
          })
           wx.redirectTo({
-            url: '../Z_index/Z_index',
+            url: '/src/index',
           })
        }
       })

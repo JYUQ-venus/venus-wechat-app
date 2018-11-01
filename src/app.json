@@ -12,7 +12,9 @@
     "src/jointeamdetail/jointeamdetail",
     "src/teamlist/teamlist",
     "src/createam/createam",
-    "src/nojointeamdetail/nojointeamdetail"
+    "src/nojointeamdetail/nojointeamdetail",
+    "src/submitsigninfor/submitsigninfor",
+    "src/editeammember/editeammember"
   ],
   "window":{
     "backgroundTextStyle": "dark",

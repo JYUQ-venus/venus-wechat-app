@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cityindex:"",
-    city: [],
+    cityindex:0,
+    city: ['全部'],
     searchvalue:"",
     teamlistArray:[],
     reviewStatus:0,

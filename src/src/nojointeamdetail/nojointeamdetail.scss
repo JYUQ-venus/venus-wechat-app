@@ -118,23 +118,31 @@ page{
   overflow: hidden;
 }
 .member{
-  overflow: hidden;
-  width:50%;
+  // overflow: hidden;
+  // width:50%;
   float: left;
   border-bottom: 1rpx solid #eee;
-  padding:40rpx 0 30rpx;
+  padding:40rpx 30rpx;
   box-sizing: border-box;
+}
+.member:first-child{
+  padding-left: 0;
 }
 .detail image{
   width: 104rpx;
   height: 104rpx;
   vertical-align:middle;
-  margin-right:30rpx;
+  // margin-right:30rpx;
+  margin: 0 auto;
   border-radius:50%;
 }
 .detail text{
   font-size: 24rpx;
   color:#333;
+  // margin: 0 auto;
+  text-align: center;
+  display: block;
+  margin-top: 20rpx;
 }
 .yes{
   background-color: gray;

@@ -84,7 +84,14 @@
 .listdetail{
   padding:20rpx 0;
   border-bottom: 1rpx solid #eee;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .listdetail_left{
+    display: flex;
+    // justify-content: space-between;
+    width: 70%;
+  }
 }
 .teamname{
   font-size: 28rpx;
@@ -106,7 +113,7 @@
   background-position: left center;
 }
 .join{
-  float: right;
+  // float: right;
   width: 172rpx;
   height: 57rpx;
   color:#fff;

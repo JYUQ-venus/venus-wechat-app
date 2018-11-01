@@ -12,8 +12,9 @@ Page({
 
   // 去填写报名信息
   gosigninfo:function(){
+    const {options} = this.data
     wx.navigateTo({
-      url: '../submitsigninfor/submitsigninfor?clubId=' + this.data.clubid + '&eventId='+this.data.raceid+'',
+      url: `/src/submitsigninfor/submitsigninfor?clubId=${options.clubid}&&eventId=${options.raceid}`
     })
   },
 
@@ -24,18 +25,15 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    var raceid = options.raceid
-    var clubid = options.clubid
     this.setData({
-      raceid: raceid,
-      clubid: clubid
+      options: options
     })
     var that = this
     wx.request({
       url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxEvent/queryEvent',
       data: {
-        eventId: raceid,
-        clubId:clubid
+        eventId: options.raceid,
+        clubId: options.clubid
       },
       header: {
         'content-type': 'application/json' // 默认值

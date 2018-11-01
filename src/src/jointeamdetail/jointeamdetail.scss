@@ -92,44 +92,44 @@ page{
   box-sizing: border-box
 }
 .member_panel::before{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    left:80rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 
 .game_panel::before{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    left:250rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 .game_honor::before{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    right:250rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 .signrace::before{
-   border-left: 15rpx solid transparent;  
-   border-right: 15rpx solid transparent;  
-   border-bottom: 20rpx solid #fff; 
-   top:-15rpx; 
+   border-left: 15rpx solid transparent;
+   border-right: 15rpx solid transparent;
+   border-bottom: 20rpx solid #fff;
+   top:-15rpx;
    right:80rpx;
-   content: "";  
-   position:absolute;      
+   content: "";
+   position:absolute;
    width: 0;
 }
 /* 球队成员 */
@@ -277,6 +277,12 @@ page{
   line-height: 120rpx;
   float: left;
   font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  >image{
+    margin-right: 20rpx;
+  }
 }
 .honorpic{
   height: 40rpx;
@@ -290,6 +296,7 @@ page{
   text-align:left;
   margin-top:20rpx;
   float: right;
+  font-size: 22rpx;
 }
 /* 报名赛事 */
 .signwarp{

@@ -10,7 +10,8 @@ Page({
     teamname:"",
     flag:1,
     region:"请选择城市",
-    leadername:""
+    leadername:"",
+    isSubmit: true
   },
 
   //上传球队logo
@@ -41,6 +42,7 @@ Page({
   },
   //创建球队
   bindcreateam:function(){
+    const { isSubmit } = this.data
     if (this.data.teamlogosrc==""){
       wx.showToast({
         title: '请上传logo',
@@ -60,93 +62,96 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
+    this.setData({
+      isSubmit: false
+    })
+
     var that = this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/registerClubCheck',
-      method: 'POST',
-      data: {
-        name: that.data.teamname
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        // console.log(res)
-        if(res.data.state==true){
-          // wx.hideLoading()
-          wx.uploadFile({
-            url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',
-            filePath: that.data.teamlogosrc[0],
-            name: 'file',
-            header: {
-              "Content-Type": 'application/x-www-form-urlencoded'
-            },
-            success: function (res) {
-              // console.log(res)
-              // wx.setStorageSync('first', 0)
-              let resdata = JSON.parse(res.data)
-              that.setData({
-                teamlogosrc: resdata.url
-              })
-              let club = {
-                thirdSession: wx.getStorageSync('sessionKey'),
-                clubLogo: that.data.teamlogosrc,
-                name: that.data.teamname,
-                city: that.data.region,
-                numberPlayers: 0,
-                introduction: " ",
-                reviewStatus: 1,
-                refuseReason: "",
-                clubStatus: 0,
-                clubReason: ""
-              }
-              wx.request({
-                url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/registerClub',
-                method: 'POST',
-                data: {
-                  club: JSON.stringify(club),
-                },
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded'
-                },
-                success: function (res) {
-                  if (res.data.state == true) {
-                    wx.hideLoading()
-                    wx.showToast({
-                      // 审核
-                      title: '已提交',
-                      image: '../../images/subsuccess.png',
-                      duration: 2000
-                    })
-                    // let pages = getCurrentPages();//当前页面
-                    // let prevPage = pages[pages.length - 2];//上一页面
-                    // prevPage.setData({//直接给上移页面赋值
-                    //   reviewStatus: 1,
-                    // });
-                    // wx.navigateBack(1)
-                    wx.redirectTo({
-                      url: `/src/index`
-                    })
-                  }else{
-                    wx.showToast({
-                      title: '网络开小差了',
-                      image: '../../images/warn.png',
-                      duration: 2000
-                    })
-                  }
+    if(isSubmit){
+      wx.request({
+        url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/registerClubCheck',
+        method: 'POST',
+        data: {
+          name: that.data.teamname
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          // console.log(res)
+          if(res.data.state==true){
+            // wx.hideLoading()
+            wx.uploadFile({
+              url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',
+              filePath: that.data.teamlogosrc[0],
+              name: 'file',
+              header: {
+                "Content-Type": 'application/x-www-form-urlencoded'
+              },
+              success: function (res) {
+                // console.log(res)
+                // wx.setStorageSync('first', 0)
+                let resdata = JSON.parse(res.data)
+                that.setData({
+                  teamlogosrc: resdata.url
+                })
+                let club = {
+                  thirdSession: wx.getStorageSync('sessionKey'),
+                  clubLogo: that.data.teamlogosrc,
+                  name: that.data.teamname,
+                  city: that.data.region,
+                  numberPlayers: 0,
+                  introduction: " ",
+                  reviewStatus: 1,
+                  refuseReason: "",
+                  clubStatus: 0,
+                  clubReason: ""
+                }
+                wx.request({
+                  url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxClub/registerClub',
+                  method: 'POST',
+                  data: {
+                    club: JSON.stringify(club),
+                  },
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                  },
+                  success: function (res) {
+                    if (res.data.state == true) {
+                      wx.hideLoading()
+                      wx.showToast({
+                        // 审核
+                        title: '已提交',
+                        image: '../../images/subsuccess.png',
+                        duration: 2000
+                      })
+                      that.setData({
+                        isSubmit: true
+                      })
+                      wx.redirectTo({
+                        url: `/src/index`
+                      })
+                      }else{
+                        wx.showToast({
+                          title: '网络开小差了',
+                          image: '../../images/warn.png',
+                          duration: 2000
+                        })
+                      }
+                    }
+                  })
                 }
               })
+            }else{
+              wx.showToast({
+                title: res.data.msg,
+                image: '../../images/warn.png',
+                duration: 2000
+              })
             }
-          })
-        }else{
-          wx.showToast({
-            title: res.data.msg,
-            image: '../../images/warn.png',
-            duration: 2000
-          })
-        }
-      }
-    })
+          }
+        })
+    }
 
   },
   /**

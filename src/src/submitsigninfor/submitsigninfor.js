@@ -1,4 +1,7 @@
 // pages/competition/submitsigninfor/submitsigninfor.js
+import * as api from '../../js/api'
+import * as util from '../../js/utils'
+
 Page({
 
   /**
@@ -81,22 +84,21 @@ Page({
       })
       return;
     }
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxEvent/addRegistrationInformation',
-      data: {
-        eventClub: eventClub
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
+    api.addRegistrationInformation({data: {
+      eventClub: JSON.stringify(eventClub)
+    }}).then(res => {
+      if(res.data.state){
         wx.showToast({
           title: '报名成功',
           icon: 'success',
-          duration: 2000
-        })
-        wx.redirectTo({
-          url:`/src/index`,
+          duration: 2000,
+          success: function(){
+            setTimeout(() => {
+              wx.redirectTo({
+                url:`/src/index`,
+              })
+            })
+          }
         })
       }
     })
@@ -110,95 +112,38 @@ Page({
       clubId: options.clubId,
       eventId: options.eventId
     })
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxEvent/insertUpdatePages',
+
+    api.insertUpdatePages({
       data: {
         clubId: options.clubId,
         eventId: options.eventId
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        var cityaddrarr = [];
-        var ecid=[];
-        for (let i = 0; i < res.data.eventCityList.length;i++){
-          var strarr = res.data.eventCityList[i].ecCity +res.data.eventCityList[i].ecAddress
-          cityaddrarr.push(strarr)
-          ecid.push(res.data.eventCityList[i].ecId)
-          that.setData({
-            eventCityAddress:ecid
-          })
-        }
-        var groplist = []
-        var egid=[]
-        for (let j = 0; j < res.data.eventGroupList.length;j++){
-          groplist.push(res.data.eventGroupList[j].egGroupName)
-          egid.push(res.data.eventGroupList[j].egId)
-          that.setData({
-            eventGroupList: egid
-          })
-        }
+      }
+    }).then(res => {
+      var cityaddrarr = [];
+      var ecid=[];
+      for (let i = 0; i < res.data.eventCityList.length;i++){
+        var strarr = res.data.eventCityList[i].ecCity +res.data.eventCityList[i].ecAddress
+        cityaddrarr.push(strarr)
+        ecid.push(res.data.eventCityList[i].ecId)
         that.setData({
-          event:res.data.event.name,
-          teamname:res.data.club.name,
-          signcityArray: cityaddrarr,
-          array: groplist
+          eventCityAddress:ecid
         })
       }
+      var groplist = []
+      var egid=[]
+      for (let j = 0; j < res.data.eventGroupList.length;j++){
+        groplist.push(res.data.eventGroupList[j].egGroupName)
+        egid.push(res.data.eventGroupList[j].egId)
+        that.setData({
+          eventGroupList: egid
+        })
+      }
+      that.setData({
+        event:res.data.event.name,
+        teamname:res.data.club.name,
+        signcityArray: cityaddrarr,
+        array: groplist
+      })
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

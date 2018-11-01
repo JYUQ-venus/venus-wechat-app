@@ -65,104 +65,66 @@ Page({
   // 点击同意
   agree:function(e){
     var that = this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/updateClubUserStatus',
-      data: {
-        thirdSession: wx.getStorageSync('thirdSession'),
-        id: e.currentTarget.dataset.id,
-        clubId: that.data.clubId,
-        auditJoin:2,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        var arr = that.data.infoarr;
-        var index = e.target.dataset.index;
-        if (arr[index].auditJoin == 1) {
-          arr[index].auditJoin = 2
-        }
-        that.setData({
-          infoarr: arr
+    api.updateClubUserStatus({data: {
+      thirdSession: wx.getStorageSync('sessionKey'),
+      id: e.currentTarget.dataset.id,
+      clubId: that.data.clubId,
+      auditJoin:2,
+    }}).then(res => {
+      if(res.data.players == 2){
+        wx.showModal({
+          title: '提示',
+          content: 'ta已在其他球队内，不能加入您的球队',
+          showCancel: false,
+          success: function(res){
+            if(res.confirm){
+              that.clearMessage(that.data.clubId, e.currentTarget.dataset.id)
+            }
+          }
+
         })
+        return
       }
+      let arr = that.data.infoarr;
+      let index = e.target.dataset.index;
+      if (arr[index].auditJoin == 1) {
+        arr[index].auditJoin = 2
+      }
+      that.setData({
+        infoarr: arr
+      })
     })
   },
-
+  clearMessage: function(cid, id){
+    const { infoarr } = this.data
+    console.log(infoarr)
+    let index = infoarr.findIndex(json => json.id == id)
+    api.clubUserDeleteByPrimaryKey({data: {
+      clubId: cid,
+      id: id
+    }}).then(json => {
+      infoarr.splice(index, 1)
+      this.setData({
+        infoarr: infoarr
+      })
+    })
+  },
   ignore:function(e){
     var that = this
-    wx.request({
-      url: 'https://slb.qmxsportseducation.com/eastStarEvent/wxUser/updateClubUserStatus',
-      data: {
-        thirdSession: wx.getStorageSync('thirdSession'),
-        id: e.currentTarget.dataset.id,
-        clubId: that.data.clubId,
-        auditJoin:0,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        var arr = that.data.infoarr;
-        var index = e.target.dataset.index;
-        if (arr[index].auditJoin == 1) {
-          arr[index].auditJoin = 3
-        }
-        that.setData({
-          infoarr: arr
-        })
+    api.updateClubUserStatus({data: {
+      thirdSession: wx.getStorageSync('sessionKey'),
+      id: e.currentTarget.dataset.id,
+      clubId: that.data.clubId,
+      auditJoin:0,
+    }}).then(res => {
+      var arr = that.data.infoarr;
+      var index = e.target.dataset.index;
+      if (arr[index].auditJoin == 1) {
+        arr[index].auditJoin = 3
       }
+      that.setData({
+        infoarr: arr
+      })
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    // wx.reLaunch({
-    //   url: '../Z_index/Z_index'
-    // })
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

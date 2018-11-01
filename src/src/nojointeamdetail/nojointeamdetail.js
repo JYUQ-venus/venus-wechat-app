@@ -54,6 +54,7 @@ Page({
           teamlogosrc: data.club.clubLogo,
           teamname: data.club.name,
           addrcity: data.club.city,
+          numberPlayers: data.club.numberPlayers,
           clubid: data.club.id,
           playerList: data.userListEventData,
           playerNum: data.userListEventData.length,
@@ -70,7 +71,7 @@ Page({
       let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {clubId: this.data.clubid}, {auditJoin: 1})
       api.applyAddTeam({data: parmas}).then(res => {
         let data = res.data
-        if(data.captain == 1 || (data.players == 1 && auditJoin == 2)){
+        if(data.captain == 1 || data.players == 2 || data.auditJoin == 2){
           wx.showModal({
             title: '提示',
             content: '您已在其他球队内，不能申请其他球队',

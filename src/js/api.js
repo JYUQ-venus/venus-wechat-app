@@ -47,3 +47,15 @@ export const getVerCode = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/smss/
 
 // 提交注册信息 /eastStarEvent/wxUser/registerUser
 export const postSignInfo = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxUser/registerUser`, options)
+
+// eastStarEvent/wxEvent/insertUpdatePages
+export const insertUpdatePages = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxEvent/insertUpdatePages`, options)
+
+// 报名 eastStarEvent/wxEvent/addRegistrationInformation
+export const addRegistrationInformation = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxEvent/addRegistrationInformation`, options)
+
+// 拒绝加入球队 /eastStarEvent/wxUser/updateClubUserStatus
+export const updateClubUserStatus = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxUser/updateClubUserStatus`, options)
+
+// clear message /wxUser/clubUserDeleteByPrimaryKey 
+export const clubUserDeleteByPrimaryKey = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxUser/clubUserDeleteByPrimaryKey`, options)

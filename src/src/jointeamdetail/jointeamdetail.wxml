@@ -78,7 +78,7 @@
                 <image src='{{item.honorLogo}}' class='honorpic'/>
                 {{item.titleHonor}}
               </view>
-              <view class="honortd honorqiuyuan">
+              <view class="honorqiuyuan">
                 <image  class='honortouxiang' src='{{item.headimg}}'/>
                 <view class='honortdcon'>
                   <view>{{item.name}}</view>
