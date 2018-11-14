@@ -22,7 +22,7 @@
         <text>{{teamLeader.name}}(球队队长)</text>
       </view>
       <view class='title'>
-        <text>— 队员({{numberPlayers}}人) —</text>
+        <text>— 队员({{numberPlayers - 1}}人) —</text>
       </view>
       <view class='memberwarp'>
         <view class='member' wx:for="{{peopleList}}" wx:key="{{key}}">

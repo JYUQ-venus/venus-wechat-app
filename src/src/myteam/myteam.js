@@ -35,8 +35,8 @@ Page({
     let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {reviewStatus: self.data.status})
     api.getTeamDetails({data: parmas}).then(json => {
       let data = json.data
-      let teamLeader = data.userListEventData.find(json => json.captain == 1)
-      let capIndex = data.userListEventData.findIndex(json => json.id == teamLeader.id)
+      let teamLeader = data.uList.find(json => json.captain == 1)
+      // let capIndex = data.userListEventData.findIndex(json => json.id == teamLeader.id)
       // data.userListEventData.splice(capIndex, 1)
       this.setData({
         clubInfo: data.club,

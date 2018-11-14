@@ -89,7 +89,6 @@ Page({
                 "Content-Type": 'application/x-www-form-urlencoded'
               },
               success: function (res) {
-                // console.log(res)
                 // wx.setStorageSync('first', 0)
                 let resdata = JSON.parse(res.data)
                 that.setData({

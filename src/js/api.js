@@ -59,3 +59,7 @@ export const updateClubUserStatus = (options) => _apiPOST(`${API_ROOT}/eastStarE
 
 // clear message /wxUser/clubUserDeleteByPrimaryKey 
 export const clubUserDeleteByPrimaryKey = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxUser/clubUserDeleteByPrimaryKey`, options)
+
+export const registerClubCheck = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxClub/registerClubCheck`, options)
+
+export const registerClub = (options) => _apiPOST(`${API_ROOT}/eastStarEvent/wxClub/registerClub`, options)

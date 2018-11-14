@@ -22,7 +22,8 @@ Page({
     gamehonorarry: [],
     signracelist: [],
     userid:"",
-    status:""
+    status:"",
+    numberPlayers: 1
   },
   /**
  * 生命周期函数--监听页面加载
@@ -39,15 +40,22 @@ Page({
     // var that = this
     let parmas = Object.assign({}, {thirdSession: wx.getStorageSync('sessionKey')}, {reviewStatus: options.reviewStatus})
     api.getTeamDetails({data: parmas}).then(res => {
-      wx.hideLoading()
+      wx.hideLoading() 
+      let index = res.data.uList.findIndex(json => json.captain == 1)
+      let teamClub = res.data.uList.splice(index, 1)
+      function teamLeader(data){
+        return data
+      }
       this.setData({
+        teamLeader: teamLeader(...teamClub),
         clubfinfo: res.data.club,
         messagelist: res.data.clubMessageList,
         gamedatarry: res.data.userListEventData,
         gamehonorarry: res.data.userList,
         signracelist: res.data.eventList,
         userid: res.data.userId,
-        peopleList: res.data.uList
+        peopleList: res.data.uList,
+        numberPlayers: res.data.club.numberPlayers
       })
       var group = []
       for (var i = 0; i < res.data.userListEventData.length; i++) {

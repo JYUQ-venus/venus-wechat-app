@@ -45,8 +45,9 @@ Page({
     const { user } = wx.getStorageSync('userInfo')
     const { options } = this.data
     if (user == null) {
-      wx.redirectTo({
-        url: `/src/register/register`,
+      let loginStatus = options.status == 'share' ? options.status : ''
+      wx.navigateTo({
+        url: `/src/register/register?loginStatus=${loginStatus}`,
       })
       return
     }

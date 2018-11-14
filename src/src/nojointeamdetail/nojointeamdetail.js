@@ -19,7 +19,8 @@ Page({
     auditJoin:"",
     gamedatarry: [],
     isAuthorization: true,
-    playerNum: 1
+    playerNum: 1,
+    numberPlayers: 1
   },
   /**
    * 生命周期函数--监听页面加载
@@ -48,9 +49,13 @@ Page({
     api.getClubPeopleDetails({data: parmas}).then(res => {
       let data = res.data
       if(data.state){
-        let teamLeader = data.userListEventData.find(json => json.captain == 1)
+        let index = data.uList.findIndex(json => json.captain == 1)
+        let teamClub = data.uList.splice(index, 1)
+        function teamLeader(data){
+          return data
+        }
         this.setData({
-          teamLeader: teamLeader,
+          teamLeader: teamLeader(...teamClub),
           teamlogosrc: data.club.clubLogo,
           teamname: data.club.name,
           addrcity: data.club.city,

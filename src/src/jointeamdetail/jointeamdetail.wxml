@@ -22,12 +22,12 @@
    <!-- 球队成员 -->
   <view class="member_panel {{selected? 'show':'hidden'}}">
       <view class='leader'>
-        <image src='{{memberlistArray.leaderhead}}'/>
-        <text>{{memberlistArray.leadername}} (球队队长)</text>
+        <image src='{{teamLeader.headimg}}'/>
+        <text>{{teamLeader.name}}(球队队长)</text>
         <!-- <view class='message' bindtap='bindmessage'>消息({{message}})</view> -->
       </view>
       <view class='title'>
-        <text>— 队员({{clubfinfo.numberPlayers}}人) —</text>
+        <text>— 队员({{numberPlayers - 1}}人) —</text>
       </view>
       <view class='memberwarp clearfix'>
             <view class='detail' wx:for="{{peopleList}}" wx:key="{{key}}">

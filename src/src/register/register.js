@@ -206,15 +206,27 @@ Page({
       return;
     }
     let isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
-    if (that.data.useridentity.idCard !== "" && isIDCard1.test(that.data.useridentity) == false) {
-      wx.showToast({
-        title: '身份证格式不正确',
-        image: '../../images/warn.png',
-        duration: 2000
-      })
-      return;
+
+    let isHIDCard = /^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8, 10})$/
+    if(that.data.useridentity.length > 10){
+      if (that.data.useridentity !== "" && isIDCard1.test(that.data.useridentity) == false) {
+        wx.showToast({
+          title: '身份证格式不正确',
+          image: '../../images/warn.png',
+          duration: 2000
+        })
+        return;
+      }
+    }else{
+      if (that.data.useridentity !== "" && isHIDCard.test(that.data.useridentity) == false) {
+        wx.showToast({
+          title: '护照格式不正确',
+          image: '../../images/warn.png',
+          duration: 2000
+        })
+        return;
+      }
     }
-    console.log(that.data.imgsrc[0])
     wx.uploadFile({
       url: 'https://slb.qmxsportseducation.com/eastStarEvent/upload/picture',
       filePath: that.data.imgsrc[0],
@@ -223,10 +235,7 @@ Page({
         "Content-Type": "multipart/form-data"
       },
       success: function (res) {
-        var resdata = JSON.parse(res.data)
-        // that.setData({
-        //   imgsrc: resdata.url
-        // })
+        let resdata = JSON.parse(res.data)
         let userInfo = wx.getStorageSync('wechatInfo')
         let people = {
           thirdSession: wx.getStorageSync('sessionKey'),
@@ -246,7 +255,7 @@ Page({
           raceNumber: that.data.usernum,
           teamPosition: that.data.userposition,
           introduction: that.data.userintroduce,
-          profilePicture: that.data.imgsrc[0]
+          profilePicture: resdata.url
         }
         var _this = that
         api.postSignInfo({data: {user: JSON.stringify(people)}}).then(res => {
@@ -259,18 +268,20 @@ Page({
             })
             return
           }
-          wx.showToast({
-            title: '提交成功',
-            image: '../../images/subsuccess.png',
-            duration: 2000
-          })
-          if (_this.data.clubId != undefined) {
-            wx.redirectTo({
-              url: '../nojointeamdetail/nojointeamdetail?id=' + _this.data.clubId + '&eventId='+ _this.data.eventId + '&auditJoin=0',
+          if(res.data.state){
+            wx.showToast({
+              title: '提交成功',
+              image: '../../images/subsuccess.png',
+              duration: 2000
             })
-          } else {
-            wx.redirectTo({
-              url: `/src/index`
+            wx.navigateBack({
+                delta: 1
+            })
+          }else{
+            wx.showToast({
+              title: '提交失败',
+              image: '../../images/warn.png',
+              duration: 2000
             })
           }
         })
