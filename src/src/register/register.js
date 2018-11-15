@@ -205,9 +205,8 @@ Page({
       })
       return;
     }
-    let isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
-
-    let isHIDCard = /^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8, 10})$/
+    let isIDCard1 = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+    let isHIDCard = /^[a-zA-Z0-9]{8,9}$/
     if(that.data.useridentity.length > 10){
       if (that.data.useridentity !== "" && isIDCard1.test(that.data.useridentity) == false) {
         wx.showToast({

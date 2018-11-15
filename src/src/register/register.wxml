@@ -56,7 +56,7 @@
     <view class='inputwarp'>
       <view class='label'>身份证/护照</view>
       <view class='input-div'>
-        <input type='number' placeholder='请输入证件号' bindinput='changeIdentity' placeholder-class="placeholder" />
+        <input type='text' placeholder='请输入证件号' bindinput='changeIdentity' placeholder-class="placeholder" />
       </view>
     </view>
     <view class='introducewarp'>
